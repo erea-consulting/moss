@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Panel de resultados MOSS · EREA Consulting</title>
+<meta name="description" content="Panel privado de resultados de la evaluación MOSS (adaptabilidad social y habilidad gerencial) de EREA Consulting.">
+<meta property="og:title" content="Panel de resultados MOSS · EREA Consulting">
+<meta property="og:description" content="Panel privado de resultados de la evaluación MOSS de EREA Consulting.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EREA Consulting">
+<meta property="og:image" content="https://erea-consulting.github.io/moss/assets/logo-erea.png">
+<link rel="icon" href="assets/logo-erea.png">
+<style>
+
+:root{--field:#0D5E4B;--acc:#0D8B7D;--ui:#267058;--soft:#E6F2EE;--ink:#1A1A1A;--body:#333333;--mute:#666666;--line:#DBE4DD;--line2:#C4D1C7;--neg:#B4543A;--pos:#2DBA85;--alert:#F4A833;--bg:#FFFFFF;--muted:#C9D3CE}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg)}
+body{font-family:Arial,Helvetica,sans-serif;color:var(--body);font-size:14px;line-height:1.45}
+.hdr{border-bottom:3px solid var(--acc);background:var(--bg);position:sticky;top:0;z-index:20}
+.hdr .row{max-width:1240px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.hdr img{height:34px}
+.hdr .ttl{flex:1;min-width:180px}
+.hdr .ttl b{display:block;color:var(--ink);font-size:16px}
+.hdr .ttl span{font-size:12px;color:var(--mute)}
+.tabs{display:flex;gap:6px}
+.tabs button,.chip{font:inherit;font-size:12px;padding:6px 14px;border:1px solid var(--line2);background:#fff;color:var(--ui);border-radius:14px;cursor:pointer}
+.tabs button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+main{max-width:1240px;margin:0 auto;padding:20px 16px 60px}
+.eyebrow{font-size:10px;letter-spacing:.22em;font-weight:bold;color:var(--acc);text-transform:uppercase;margin-bottom:6px}
+h2{font-size:21px;line-height:1.3;color:var(--ink);margin:0 0 6px}
+h2:after{content:"";display:block;width:64px;height:3px;background:var(--acc);margin-top:10px}
+h3{font-size:15px;color:var(--ink);margin:0 0 8px;padding-bottom:6px;border-bottom:2px solid var(--line2)}
+.card{border:1px solid var(--line);border-radius:3px;padding:16px;background:#fff}
+.login{max-width:520px;margin:40px auto}
+.f{display:flex;flex-direction:column;gap:4px;margin:12px 0}
+.f label{font-size:12px;font-weight:bold;color:var(--ink)}
+input,select{font:inherit;font-size:14px;padding:8px 10px;border:1px solid var(--line2);border-radius:3px;background:#fff;color:var(--ink)}
+.btn{font:inherit;font-weight:bold;padding:9px 18px;border-radius:3px;border:1px solid var(--acc);background:var(--acc);color:#fff;cursor:pointer}
+.btn.sec{background:#fff;color:var(--ui);border-color:var(--line2)}
+.err{color:var(--neg);font-weight:bold;margin-top:8px}
+.filters{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:14px 0 4px}
+.filters .f{margin:0}
+.bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:10px 0 18px}
+.bar .grow{flex:1}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin:8px 0 22px}
+.kpi{border:1px solid var(--line);border-top:3px solid var(--line2);border-radius:3px;padding:12px 14px}
+.kpi.acc{border-top-color:var(--acc)}
+.kpi .l{font-size:10px;letter-spacing:.18em;color:var(--mute);font-weight:bold;text-transform:uppercase}
+.kpi .v{font-size:30px;font-weight:bold;color:var(--ink);line-height:1.1;margin:4px 0 2px}
+.kpi.acc .v{color:var(--acc)}
+.kpi .n{font-size:12px;color:var(--mute)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:22px}
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{background:var(--field);color:#fff;font-weight:bold;padding:7px 9px;text-align:left;border:.5px solid var(--line2);white-space:nowrap}
+.tbl td{padding:6px 9px;border:.5px solid var(--line2)}
+.tbl td.num,.tbl th.num{text-align:right}
+.tbl tbody tr:nth-child(even) td{background:rgba(13,94,75,.035)}
+.tbl tbody tr.click{cursor:pointer}.tbl tbody tr.click:hover td{background:var(--soft)}
+.wrap{overflow-x:auto}
+.src{font-size:11px;color:var(--mute);font-style:italic;margin-top:8px}
+.hm{display:inline-block;min-width:38px;text-align:center;padding:2px 4px;border-radius:2px}
+.tag{display:inline-block;font-size:11px;font-weight:bold;padding:2px 8px;border-radius:10px;background:var(--soft);color:var(--field)}
+.tag.warn{background:#FDF5E6;color:#8a5a00}
+/* ---- reporte individual ---- */
+.rep{max-width:900px;margin:0 auto;background:#fff}
+.rep .rhead{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid var(--acc);padding-bottom:12px;margin-bottom:16px}
+.rep .rhead img{height:40px}
+.rep .rhead .st{font-size:10px;letter-spacing:.2em;color:var(--mute);border-left:2px solid var(--acc);padding-left:8px;text-transform:uppercase}
+.rep h1{font-size:24px;color:var(--ink);margin:4px 0 2px;text-transform:uppercase}
+.rep .who{display:grid;grid-template-columns:repeat(4,1fr);gap:8px 16px;margin:14px 0 18px;font-size:13px}
+.rep .who div span{display:block;font-size:10px;letter-spacing:.16em;color:var(--mute);font-weight:bold;text-transform:uppercase}
+.rep .who div b{color:var(--ink)}
+.charts3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:8px 0 6px}
+.charts3 .c{border:1px solid var(--line);border-radius:3px;padding:10px 10px 6px}
+.charts3 .c.main{border-top:3px solid var(--acc)}
+.charts3 .ct{font-size:12px;font-weight:bold;color:var(--ink)}
+.charts3 .cs{font-size:11px;color:var(--mute);margin-bottom:4px}
+.charts3 .cb{font-size:12px;margin-top:4px;color:var(--body)}
+.kicker{margin:16px 0;padding:12px 16px;background:var(--soft);border-radius:3px;font-weight:bold;color:var(--ink);text-align:center;font-size:15px}
+.sec{margin:20px 0}
+.sec p{margin:6px 0;text-align:justify}
+.keyw{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.keyw>div{border:1px solid var(--line);border-top:3px solid var(--line2);padding:10px 12px;border-radius:3px}
+.keyw>div.hi{border-top-color:var(--acc)}
+.keyw .l{font-size:10px;letter-spacing:.16em;color:var(--mute);font-weight:bold;text-transform:uppercase}
+.keyw .p{font-size:22px;font-weight:bold;color:var(--ink)}
+.keyw .t{font-size:13px;color:var(--body)}
+.carac h4{font-size:13px;color:var(--field);margin:14px 0 4px;letter-spacing:.06em;text-transform:uppercase}
+.rfoot{border-top:1px solid var(--line);margin-top:24px;padding-top:8px;font-size:10px;color:var(--mute);display:flex;justify-content:space-between;gap:12px}
+.pb{break-after:page;page-break-after:always}
+.noprint{}
+.alerta{border-left:4px solid var(--neg);background:#F8ECE8;padding:12px 16px;border-radius:3px;margin:10px 0}
+.alerta b{color:var(--ink)}.alerta .bf{color:var(--neg);font-weight:bold;margin-top:6px}
+.alerta.r{border-left-color:var(--alert);background:#FDF5E6}
+.chip{display:inline-block;font-size:12px;padding:3px 10px;border-radius:12px;background:var(--soft);color:var(--field);font-weight:bold;margin:2px 4px 2px 0;cursor:default}
+.fhbox{background:var(--soft);border-radius:3px;padding:10px 14px;margin:8px 0}
+.fhbox .l{font-size:10px;letter-spacing:.16em;font-weight:bold;color:var(--acc);text-transform:uppercase}
+.fhgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.fhgrid>div{border:1px solid var(--line);border-top:3px solid var(--line2);border-radius:3px;padding:10px 12px}
+.fhgrid>div.hi{border-top-color:var(--acc)}
+.fhgrid h4{margin:0 0 4px;font-size:12px;color:var(--ink)}
+.fhgrid .lv{font-size:10px;letter-spacing:.14em;font-weight:bold;color:var(--mute);text-transform:uppercase;margin-bottom:4px}
+.fhgrid ul{margin:0;padding-left:16px;font-size:12px}.fhgrid li{margin:2px 0}
+.ruedabox{display:grid;grid-template-columns:3fr 2fr;gap:20px;align-items:center}
+.tp{border:1px solid var(--line);border-top:3px solid var(--acc);border-radius:3px;padding:12px 14px}
+.tp .n{font-size:22px;font-weight:bold;color:var(--ink)}
+.tp .a{font-size:12px;color:var(--mute);margin-bottom:6px}
+.aj{display:grid;grid-template-columns:2fr 3fr;gap:22px;align-items:start;margin-bottom:22px}
+.fhform{width:100%;border-collapse:collapse;font-size:13px}
+.fhform td{padding:4px 6px;border-bottom:1px solid var(--line)}
+.fhform td.n{width:28px;color:var(--mute);text-align:right}
+.fhform select{padding:4px 6px;font-size:13px}
+.dist{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0;font-size:12px}
+.dist span{padding:3px 8px;border-radius:10px;border:1px solid var(--line2)}
+.dist span.ok{background:var(--soft);border-color:var(--acc);color:var(--field);font-weight:bold}
+.dist span.bad{border-color:var(--neg);color:var(--neg);font-weight:bold}
+.tag.alto{background:#E3F6EE;color:#17724F}.tag.medio{background:#FDF5E6;color:#8a5a00}.tag.bajo{background:#F8ECE8;color:#9a3f28}
+.rggrid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.rggrid .card{margin:0}
+.rggrid h4{margin:0 0 2px;font-size:15px;color:var(--ink);display:flex;align-items:center;gap:8px}
+.rggrid .sw{display:inline-block;width:12px;height:12px;border-radius:50%}
+.rggrid .meta{font-size:12px;color:var(--mute);margin-bottom:6px}
+.rggrid p{font-size:13px;line-height:1.5;margin:8px 0 0}
+.leg{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px}.leg span{display:inline-flex;align-items:center;gap:6px}.leg i{width:11px;height:11px;border-radius:50%;display:inline-block}
+[hidden]{display:none!important}
+@media (max-width:900px){.rggrid,.grid2,.charts3,.keyw,.fhgrid,.ruedabox,.aj{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,1fr)}.rep .who{grid-template-columns:1fr 1fr}}
+@media print{
+ @page{size:A4;margin:14mm 12mm}
+ body{font-size:11px}
+ .hdr,.noprint{display:none!important}
+ main{padding:0;max-width:none}
+ .charts3{grid-template-columns:repeat(3,1fr)}
+ .keyw,.fhgrid{grid-template-columns:repeat(4,1fr)}
+ .ruedabox{grid-template-columns:3fr 2fr}
+ .rggrid{grid-template-columns:1fr 1fr}
+ .rggrid .card{break-inside:avoid}
+ .rep .who{grid-template-columns:repeat(4,1fr)}
+ .grid2{grid-template-columns:1fr 1fr}
+ .kpis{grid-template-columns:repeat(5,1fr)}
+ .sec,.charts3,.card{break-inside:avoid}
+ .sec.carac{break-inside:auto}
+ .carac h4{break-after:avoid}
+ .wrap{overflow:visible!important}
+ table.tbl{width:100%;font-size:9px;table-layout:auto}
+ .tbl th,.tbl td{padding:3px 4px!important;white-space:normal!important}
+ select{-webkit-appearance:none;appearance:none;border:0!important;background:none!important;padding:0!important;font-weight:bold;color:var(--ink)}
+ .card{overflow:visible}
+ *,*::before,*::after{box-sizing:border-box}
+ main,section,.card,.rep{max-width:100%!important;width:auto!important}
+}
+
+/* ---- MOSS ---- */
+.kpis.k6{grid-template-columns:repeat(6,1fr)}
+.lv{display:inline-block;font-size:11px;font-weight:bold;padding:2px 8px;border-radius:10px;white-space:nowrap}
+.lv.b0{background:#F3DDD6;color:#8E3A24}.lv.b1{background:#F8ECE8;color:#9a3f28}.lv.b2{background:#FDF0DE;color:#8a5a00}
+.lv.b3{background:#EEF2EF;color:#3F4B45}.lv.b4{background:#E3F2EC;color:#1D6B52}.lv.b5{background:#D3EEE3;color:#17724F}.lv.b6{background:#BFE6D6;color:#0D5E4B}
+.areas5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:12px 0}
+.areas5>div{border:1px solid var(--line);border-top:3px solid var(--line2);border-radius:3px;padding:10px 12px}
+.areas5>div.hi{border-top-color:var(--acc)}.areas5>div.lo{border-top-color:var(--neg)}
+.areas5 .l{font-size:10px;letter-spacing:.14em;color:var(--mute);font-weight:bold;text-transform:uppercase}
+.areas5 .p{font-size:24px;font-weight:bold;color:var(--ink);line-height:1.15}
+.areas5 .n{font-size:12px;color:var(--mute)}
+.lect{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.lect>div{border:1px solid var(--line);border-left:4px solid var(--line2);border-radius:3px;padding:10px 14px}
+.lect>div.alto{border-left-color:var(--acc)}.lect>div.bajo{border-left-color:var(--neg)}
+.lect h4{margin:0 0 4px;font-size:13px;color:var(--ink);display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.lect p{margin:4px 0 0;font-size:13px;text-align:left}
+.lect .d{font-size:12px;color:var(--mute)}
+.evid td{vertical-align:top}
+.evid .ok{color:var(--field);font-weight:bold}
+.tend{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 10px}
+.tend span{border:1px solid var(--line2);border-radius:12px;padding:3px 10px;font-size:12px}
+.tend span.top{background:#FDF5E6;border-color:var(--alert);font-weight:bold;color:var(--ink)}
+.cruce{border-left:4px solid var(--alert);background:#FDF5E6;padding:10px 14px;border-radius:3px;margin:8px 0}
+.cruce.fortaleza{border-left-color:var(--acc);background:var(--soft)}
+.cruce b{color:var(--ink)}
+.disc4{display:flex;gap:10px;margin:6px 0 4px;flex-wrap:wrap}
+.disc4 span{border:1px solid var(--line);border-radius:3px;padding:4px 10px;font-size:13px}
+.disc4 span b{color:var(--ink)}
+.recs{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.recs>div{border:1px solid var(--line);border-top:3px solid var(--acc);border-radius:3px;padding:10px 14px}
+.recs h4{margin:0 0 6px;font-size:13px;color:var(--ink)}
+.recs ol,.recs ul{margin:0;padding-left:18px;font-size:13px}.recs li{margin:4px 0}
+.metodo{font-size:11px;color:var(--mute);border-top:1px solid var(--line);margin-top:18px;padding-top:8px}
+.opt2{font-size:12px;color:var(--mute);margin-top:10px}
+@media (max-width:900px){.areas5{grid-template-columns:repeat(2,1fr)}.lect,.recs{grid-template-columns:1fr}.kpis.k6{grid-template-columns:repeat(2,1fr)}}
+@media print{.sec.flow{break-inside:auto}.sec h3{break-after:avoid}.evid tr{break-inside:avoid}.areas5{grid-template-columns:repeat(5,1fr)}.lect,.recs{grid-template-columns:1fr 1fr}.kpis.k6{grid-template-columns:repeat(6,1fr)}.lect>div,.recs>div,.cruce{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header class="hdr">
+ <div class="row">
+  <img src="https://www.ereaconsulting.com/logo.svg" alt="EREA Consulting Group" onerror="this.onerror=null;this.src='assets/logo-erea.png'">
+  <div class="ttl"><b>Panel de resultados MOSS</b><span id="hdrSub">Uso exclusivo del equipo consultor</span></div>
+  <div class="tabs" id="tabs" hidden>
+   <button data-tab="consolidado" class="on">Consolidado</button>
+   <button data-tab="individual">Individual</button>
+   <button data-tab="recargar">Actualizar</button>
+  </div>
+ </div>
+</header>
+
+<main>
+ <!-- LOGIN -->
+ <section id="vLogin" class="login card">
+  <div class="eyebrow">Acceso restringido</div>
+  <h2>Conectar con los resultados</h2>
+  <div class="f"><label>URL de la aplicación MOSS (Apps Script /exec)</label><input id="inUrl" placeholder="https://script.google.com/macros/s/.../exec"></div>
+  <div class="f"><label>Token del panel MOSS (hoja Config)</label><input id="inTok" type="password"></div>
+  <details class="opt2"><summary>Cruzar con resultados DISC (opcional)</summary>
+   <div class="f"><label>URL de la aplicación CLEAVER (DISC)</label><input id="inUrlD" placeholder="Se toma del panel DISC si ya lo abrió en este equipo"></div>
+   <div class="f"><label>Token del panel DISC</label><input id="inTokD" type="password"></div>
+  </details>
+  <label style="font-size:12px;display:flex;gap:6px;align-items:center;margin-top:10px"><input type="checkbox" id="inRem" checked> Recordar en este equipo</label>
+  <div style="margin-top:14px"><button class="btn" id="btnLogin">Entrar</button></div>
+  <div class="err" id="loginErr"></div>
+ </section>
+
+ <!-- CONSOLIDADO -->
+ <section id="vCons" hidden>
+  <div class="eyebrow">Reporte consolidado · MOSS</div>
+  <h2 id="consTitle">Juicio en relaciones humanas del grupo</h2>
+  <div class="filters noprint" id="filters"></div>
+  <div class="bar noprint">
+   <span class="grow" id="filterInfo"></span>
+   <button class="btn sec" id="btnClear">Limpiar filtros</button>
+   <button class="btn sec" id="btnCsv">Descargar CSV</button>
+   <button class="btn sec" id="btnPrintAll">Imprimir reportes individuales (filtrados)</button>
+   <button class="btn" onclick="window.print()">Imprimir consolidado</button>
+  </div>
+  <div class="kpis k6" id="kpis"></div>
+  <div class="kicker" id="consKicker"></div>
+  <div class="card" style="margin-bottom:22px"><h3>Promedio del grupo por área</h3><div id="chAreas"></div><div class="src">Porcentaje de aciertos promedio. Las franjas de fondo son los 7 niveles de la gráfica de resultados del manual MOSS.</div></div>
+  <div class="card" style="margin-bottom:22px"><h3>Distribución de niveles por área</h3><div class="wrap" id="tblDist"></div><div class="src">Número de personas en cada nivel (y % del grupo filtrado).</div></div>
+  <div class="card" style="margin-bottom:22px">
+   <div class="bar" style="margin:0 0 10px"><h3 style="border:0;margin:0;padding:0" class="grow">Segmentación</h3><label style="font-size:12px">Agrupar por <select id="grpBy"></select></label></div>
+   <div class="wrap" id="tblSeg"></div>
+   <div class="src">Porcentaje promedio por área; verde: por encima del promedio del manual (≥ 64), terracota: por debajo (&lt; 42). Grupos con menos de 5 personas se marcan con *: interpretar con cautela.</div>
+  </div>
+  <div class="grid2">
+   <div class="card"><h3>Cómo se equivoca el grupo</h3><div id="chTend"></div><div class="src">Tendencia que expresa cada respuesta no acertada (lectura EREA de los distractores). Porcentaje sobre el total de respuestas no acertadas del grupo.</div></div>
+   <div class="card"><h3>Mandos por debajo del mínimo esperado</h3><div id="tblBrecha"></div><div class="src">Criterio EREA: en Supervisión, Jefatura, Gerencia y Dirección se espera al menos nivel Promedio (≥ 42%) en Supervisión (HS) y Decisión (CD).</div></div>
+  </div>
+  <div class="card" style="margin-bottom:22px"><h3>Situaciones donde más falla el grupo</h3><div class="wrap" id="tblItems"></div><div class="src">Las 10 situaciones con menor porcentaje de acierto y la respuesta no acertada más elegida.</div></div>
+  <div class="card" style="margin-bottom:22px" id="cardDisc"><h3>Cruce con DISC</h3><div id="tblDisc"></div></div>
+  <div class="card"><h3>Alertas de calidad de respuesta</h3><div id="tblAlertas"></div></div>
+ </section>
+
+ <!-- INDIVIDUAL -->
+ <section id="vInd" hidden>
+  <div class="noprint">
+   <div class="eyebrow">Reportes individuales</div>
+   <h2>Participantes</h2>
+   <div class="bar"><input id="search" placeholder="Buscar por nombre, ID, código, área…" style="flex:1;min-width:220px"><span id="indCount" class="tag"></span></div>
+   <div class="wrap" id="tblInd"></div>
+  </div>
+ </section>
+
+ <!-- REPORTE -->
+ <section id="vRep" hidden>
+  <div class="bar noprint"><button class="btn sec" id="btnBack">Volver</button><span class="grow"></span><button class="btn" onclick="window.print()">Imprimir / Guardar PDF</button></div>
+  <div id="repBox"></div>
+ </section>
+</main>
+
+<script>
+var DEFAULT_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwTYeDnJZjF_W_-h5wQb14k34qIxSjaXn8wM7vwP4ly5KwxnDROguvXcBZrP0MszBdx/exec';
+var A5 = ['HS','CD','EPI','RI','SC'];
+var NIV = ['Deficiente','Inferior','Medio inferior','Promedio','Medio superior','Superior','Muy superior'];
+var DIMS = [['empresa','Empresa'],['area','Área'],['puesto','Puesto'],['sede','Sede'],['nivel','Nivel jerárquico'],['genero','Género'],['antiguedad','Antigüedad'],['edad_r','Rango de edad']];
+var DATA = null, MOSS = {}, FILT = {}, DISC = null;
+// ===== Motor de calificación MOSS (EREA) =====
+// Clave, áreas y niveles del Manual del Test de Adaptabilidad Social (MOSS), verificados contra el Excel EREA.
+// Entrada: respuestas = ['A'|'B'|'C'|'D' x 30]. Requiere el objeto MOSS (moss_data.json) en el mismo ámbito.
+
+var MOSS_AREAS = ['HS', 'CD', 'EPI', 'RI', 'SC'];
+
+function mossNivel(pct) {
+  for (var i = 0; i < MOSS.niveles.length; i++) if (pct <= MOSS.niveles[i][1]) return MOSS.niveles[i][2];
+  return MOSS.niveles[MOSS.niveles.length - 1][2];
+}
+// Banda simplificada para textos y alertas: bajo (< 42) · medio (42–63) · alto (≥ 64)
+function mossBanda(pct) { return pct < 42 ? 'bajo' : (pct < 64 ? 'medio' : 'alto'); }
+function mossArea(id) { return MOSS.areas.filter(function (a) { return a.id === id; })[0]; }
+
+function mossCalificar(resp) {
+  var r = { aciertos: {}, n: {}, pct: {}, nivel: {}, banda: {}, items: [], errores: {}, total: 0 };
+  MOSS.areas.forEach(function (a) {
+    var ok = 0;
+    a.items.forEach(function (n) { if (String(resp[n - 1]).toUpperCase() === MOSS.clave[n - 1]) ok++; });
+    r.aciertos[a.id] = ok; r.n[a.id] = a.items.length;
+    r.pct[a.id] = a.pct[ok];                 // % según la tabla del manual (17, 34, 50…)
+    r.nivel[a.id] = mossNivel(r.pct[a.id]);
+    r.banda[a.id] = mossBanda(r.pct[a.id]);
+    r.total += ok;
+  });
+  for (var n = 1; n <= 30; n++) {
+    var x = String(resp[n - 1] || '').toUpperCase(), k = MOSS.clave[n - 1], ok = x === k;
+    var tag = ok ? '' : (MOSS.distractores[String(n)] || {})[x] || '';
+    r.items.push({ n: n, resp: x, clave: k, ok: ok, tag: tag, area: MOSS.items[n - 1].area });
+    if (tag) r.errores[tag] = (r.errores[tag] || 0) + 1;
+  }
+  r.pctGlobal = Math.round(100 * r.total / 30);
+  r.nivelGlobal = mossNivel(r.pctGlobal);
+  // Fortalezas y áreas de desarrollo
+  var orden = MOSS_AREAS.slice().sort(function (a, b) { return r.pct[b] - r.pct[a]; });
+  r.fuertes = orden.filter(function (a) { return r.pct[a] >= 64; });
+  r.debiles = orden.slice().reverse().filter(function (a) { return r.pct[a] < 42; });
+  r.mejor = orden[0]; r.peor = orden[orden.length - 1];
+  // Patrón de error dominante (excluye la lectura de personas, que tiene su propia área)
+  var tags = Object.keys(r.errores).filter(function (t) { return t !== 'LEC'; }).sort(function (a, b) { return r.errores[b] - r.errores[a]; });
+  r.patron = tags.length && r.errores[tags[0]] >= 3 ? tags[0] : '';
+  r.patron2 = tags.length > 1 && r.errores[tags[1]] >= 3 ? tags[1] : '';
+  return r;
+}
+
+// Alertas de calidad: respuesta rápida y patrón de respuesta (misma letra o secuencia ABCD)
+function mossCalidad(durMin, resp) {
+  var out = [], c = MOSS.calidad || {};
+  if (durMin !== '' && durMin != null && !isNaN(durMin) && +durMin < (c.minMinutos || 8))
+    out.push({ clave: 'RAPIDA', tipo: 'Respuesta rápida', desc: 'Completó las 30 situaciones en ' + String(Math.round(+durMin * 10) / 10).replace('.', ',') + ' min (mínimo esperado: ' + (c.minMinutos || 8) + ' min). Puede haber respondido sin leer con atención: conviene validar el resultado con la persona o repetir la prueba.' });
+  if (resp && resp.length === 30) {
+    var f = {}; resp.forEach(function (x) { f[x] = (f[x] || 0) + 1; });
+    var max = Math.max.apply(null, Object.keys(f).map(function (k) { return f[k]; }));
+    var seq = 0; for (var i = 1; i < 30; i++) if ('ABCD'.indexOf(resp[i]) === ('ABCD'.indexOf(resp[i - 1]) + 1) % 4) seq++;
+    if (max >= (c.maxMismaLetra || 15) || seq >= 20)
+      out.push({ clave: 'PATRON', tipo: 'Patrón de respuesta', desc: max >= (c.maxMismaLetra || 15) ? 'Eligió la misma letra en ' + max + ' de 30 situaciones. Puede no haber respondido con atención.' : 'Las respuestas siguen una secuencia (A, B, C, D…) en ' + seq + ' de 29 pasos. Puede no haber respondido con atención.' });
+  }
+  return out;
+}
+
+// Mínimo esperado por nivel jerárquico (propuesta EREA): puestos con personal a cargo, HS y CD ≥ Promedio
+function mossBrechaNivel(r, nivelJer) {
+  var m = MOSS.minNivel; if (!m || m.puestos.indexOf(nivelJer) < 0) return [];
+  return m.areas.filter(function (a) { return r.pct[a] < m.min; });
+}
+
+// Cruce con DISC (perfil Normal en percentiles): reglas de MOSS.cruceDisc
+function mossCruceDisc(r, disc) {
+  if (!disc) return [];
+  return (MOSS.cruceDisc || []).filter(function (c) {
+    var dv = disc[c.disc[0]], okD = c.disc[1] === 'alto' ? dv > 50 : dv < 50;
+    var b = r.banda[c.moss[0]], okM = c.moss[1] === 'bajo' ? b === 'bajo' : b === 'alto';
+    return okD && okM;
+  });
+}
+
+
+
+function $(id){return document.getElementById(id);}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v);}catch(e){return null;}}
+function edadR(e){if(e===''||e==null||isNaN(e))return 'Sin dato';e=+e;return e<25?'Menos de 25':e<35?'25 a 34':e<45?'35 a 44':e<55?'45 a 54':'55 o más';}
+function fmtFecha(s){var d=new Date(s);return isNaN(d)?'':d.toLocaleDateString('es-HN',{day:'2-digit',month:'short',year:'numeric'});}
+function idKey(v){return String(v||'').replace(/\D/g,'');}
+function mask(v){v=String(v||'');return v.length>4?'•••• '+v.slice(-4):v;}
+function lvTag(n){var i=NIV.indexOf(n);return '<span class="lv b'+(i<0?3:i)+'">'+esc(n)+'</span>';}
+function ar(id){return mossArea(id);}
+function hmA(v){return v>=64?'rgba(13,139,125,'+(0.12+0.5*Math.min((v-64)/36,1))+')':(v<42?'rgba(180,84,58,'+(0.1+0.45*Math.min((42-v)/42,1))+')':'transparent');}
+
+/* ---------------- login ---------------- */
+(function(){
+  var h = new URLSearchParams(location.hash.slice(1));
+  $('inUrl').value = h.get('url') || ls('erea_moss_panel_url') || (DEFAULT_ENDPOINT.indexOf('http')===0?DEFAULT_ENDPOINT:'');
+  $('inTok').value = h.get('token') || ls('erea_moss_panel_tok') || '';
+  $('inUrlD').value = ls('erea_cleaver_panel_url') || '';
+  $('inTokD').value = ls('erea_cleaver_panel_tok') || '';
+  if (h.get('token')) history.replaceState(null,'',location.pathname);
+  if ($('inUrl').value && $('inTok').value) cargar();
+})();
+$('btnLogin').onclick = cargar;
+function getJSON(url, tok){ return fetch(url + (url.indexOf('?')<0?'?':'&') + 'action=data&token=' + encodeURIComponent(tok)).then(function(r){return r.json();}); }
+function cargar(){
+  var url = $('inUrl').value.trim(), tok = $('inTok').value.trim();
+  $('loginErr').textContent = ''; $('btnLogin').textContent = 'Cargando…';
+  getJSON(url, tok).then(function(j){
+     $('btnLogin').textContent = 'Entrar';
+     if (!j.ok) throw new Error(j.error||'Error');
+     if ($('inRem').checked){ ls('erea_moss_panel_url',url); ls('erea_moss_panel_tok',tok); } else { ls('erea_moss_panel_url',null); ls('erea_moss_panel_tok',null); }
+     MOSS = j.moss;
+     DATA = j.registros.map(function(x){ x.datos.edad_r = edadR(x.edad); x.r = mossCalificar(x.resp); x.cal = mossCalidad(x.duracionMin, x.resp); x.brecha = mossBrechaNivel(x.r, x.datos.nivel); return x; });
+     var vistos = {}; DATA.forEach(function(x){ var id = idKey(x.datos.identidad); x.idRep=''; if(!id)return; if(vistos[id]) x.idRep = vistos[id]; else vistos[id] = x.folio; });
+     DATA.forEach(function(x){ x.alq = x.cal.map(function(q){return q.tipo;}); if (x.idRep) x.alq.push('ID repetido'); });
+     $('hdrSub').textContent = DATA.length + ' respuestas · actualizado ' + new Date(j.generado).toLocaleString('es-HN');
+     $('vLogin').hidden = true; $('tabs').hidden = false;
+     buildFilters(); tab('consolidado');
+     cargarDisc();
+   })
+   .catch(function(e){ $('btnLogin').textContent='Entrar'; $('vLogin').hidden=false; $('loginErr').textContent = 'No se pudo conectar: ' + e.message; });
+}
+function cargarDisc(){
+  var u = $('inUrlD').value.trim(), t = $('inTokD').value.trim();
+  if (!u || !t) { DISC = null; return; }
+  getJSON(u, t).then(function(j){
+    if (!j.ok) throw new Error(j.error);
+    DISC = {}; (j.registros||[]).forEach(function(d){ var k = idKey(d.datos.identidad); if (k && !DISC[k]) DISC[k] = {folio:d.folio, normal:d.r.normal, comb:d.r.combNormal}; });
+    if ($('inRem').checked){ ls('erea_cleaver_panel_url',u); ls('erea_cleaver_panel_tok',t); }
+    DATA.forEach(function(x){ x.disc = DISC[idKey(x.datos.identidad)] || null; x.cruce = x.disc ? mossCruceDisc(x.r, x.disc.normal) : []; });
+    if (!$('vCons').hidden) renderCons();
+  }).catch(function(){ DISC = null; });
+}
+
+/* ---------------- navegación ---------------- */
+$('tabs').onclick = function(e){ var b=e.target.closest('button'); if(!b)return; var t=b.getAttribute('data-tab'); if(t==='recargar'){cargar();return;} tab(t); };
+function tab(t){
+  document.querySelectorAll('#tabs button').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-tab')===t);});
+  $('vCons').hidden = t!=='consolidado'; $('vInd').hidden = t!=='individual'; $('vRep').hidden = true;
+  if (t==='consolidado') renderCons(); else renderInd();
+  window.scrollTo(0,0);
+}
+
+/* ---------------- filtros ---------------- */
+function uniq(a){var o={};a.forEach(function(v){o[v]=1;});return Object.keys(o).sort(function(a,b){return a.localeCompare(b,'es');});}
+function buildFilters(){
+  var h='';
+  DIMS.forEach(function(d){
+    var vals = uniq(DATA.map(function(x){return x.datos[d[0]]||'Sin dato';}));
+    if (vals.length < 2 && d[0]!=='empresa') return;
+    h += '<div class="f"><label>'+d[1]+'</label><select data-dim="'+d[0]+'"><option value="">Todos</option>'+vals.map(function(v){return '<option'+(FILT[d[0]]===v?' selected':'')+'>'+esc(v)+'</option>';}).join('')+'</select></div>';
+  });
+  $('filters').innerHTML = h;
+  $('grpBy').innerHTML = DIMS.filter(function(d){return d[0]!=='empresa'||uniq(DATA.map(function(x){return x.datos.empresa;})).length>1;}).map(function(d){return '<option value="'+d[0]+'">'+d[1]+'</option>';}).join('');
+  $('grpBy').value = 'nivel';
+}
+$('filters').onchange = function(e){ var d=e.target.getAttribute('data-dim'); if(e.target.value) FILT[d]=e.target.value; else delete FILT[d]; renderCons(); };
+$('btnClear').onclick = function(){ FILT={}; buildFilters(); renderCons(); };
+$('grpBy').onchange = function(){ renderSeg(filtered()); };
+function filtered(){ return DATA.filter(function(x){ for (var k in FILT) if ((x.datos[k]||'Sin dato')!==FILT[k]) return false; return true; }); }
+
+/* ---------------- gráfico de áreas con franjas del manual ---------------- */
+function svgAreas(rows){
+  // rows: [{l, v, sub, bold}]
+  var W=760, rh=42, l=250, r=58, t=26, H=t+rows.length*rh+8, w=W-l-r;
+  var X=function(v){return l+w*v/100;};
+  var B=[[0,6.5,'#F3DDD6'],[6.5,26.5,'#F8ECE8'],[26.5,41.5,'#FDF0DE'],[41.5,63.5,'#EEF2EF'],[63.5,82.5,'#E3F2EC'],[82.5,97.5,'#D3EEE3'],[97.5,100,'#BFE6D6']];
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="100%" role="img" font-family="Arial">';
+  B.forEach(function(b,i){ s+='<rect x="'+X(b[0])+'" y="'+(t-4)+'" width="'+(X(b[1])-X(b[0]))+'" height="'+(rows.length*rh+4)+'" fill="'+b[2]+'"/>';
+    var lab = ['Def.','Inferior','Medio inf.','Promedio','Medio sup.','Superior','M. sup.'][i];
+    s+='<text x="'+((X(b[0])+X(b[1]))/2)+'" y="'+(t-10)+'" font-size="10" text-anchor="middle" fill="#666">'+lab+'</text>'; });
+  rows.forEach(function(it,i){ var y=t+i*rh, v=it.v;
+    s+='<text x="0" y="'+(y+17)+'" font-size="13" '+(it.bold?'font-weight="bold" ':'')+'fill="#1A1A1A">'+esc(it.l)+'</text>';
+    if (it.sub) s+='<text x="0" y="'+(y+32)+'" font-size="10.5" fill="#666">'+esc(it.sub)+'</text>';
+    s+='<rect x="'+l+'" y="'+(y+8)+'" width="'+Math.max(2,X(v)-l)+'" height="18" fill="'+(it.bold?'#0D5E4B':'#0D8B7D')+'"/>';
+    s+='<text x="'+(X(v)+6)+'" y="'+(y+22)+'" font-size="13" font-weight="bold" fill="#1A1A1A">'+Math.round(v)+'%</text>'; });
+  return s+'</svg>';
+}
+function svgBarsH(items){
+  var W=520,rh=34,H=items.length*rh+6,x0=200,w=W-x0-60, mx=Math.max.apply(null,items.map(function(i){return i.v;}))||1;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="100%" font-family="Arial">';
+  items.forEach(function(it,i){ var y=i*rh+4, bw=Math.max(2,w*it.v/mx);
+    s+='<text x="0" y="'+(y+16)+'" font-size="12" fill="#333">'+esc(it.l)+'</text><rect x="'+x0+'" y="'+(y+3)+'" width="'+bw+'" height="18" fill="'+(it.hi?'#F4A833':'#C9D3CE')+'"/><text x="'+(x0+bw+6)+'" y="'+(y+16)+'" font-size="12" font-weight="bold" fill="#1A1A1A">'+esc(it.t)+'</text>'; });
+  return s+'</svg>';
+}
+
+/* ---------------- consolidado ---------------- */
+function avg(D,f){ return D.length ? D.reduce(function(s,x){return s+f(x);},0)/D.length : 0; }
+function renderCons(){
+  var D = filtered(), n = D.length;
+  var desc = Object.keys(FILT).map(function(k){return FILT[k];}).join(' · ');
+  $('filterInfo').textContent = n + ' de ' + DATA.length + ' participantes' + (desc?' · '+desc:'');
+  $('consTitle').textContent = 'Juicio en relaciones humanas del grupo' + (desc?' · '+desc:'');
+  var g = avg(D,function(x){return x.r.pctGlobal;}), am = {};
+  A5.forEach(function(a){ am[a] = avg(D,function(x){return x.r.pct[a];}); });
+  var ord = A5.slice().sort(function(a,b){return am[b]-am[a];});
+  var mandos = D.filter(function(x){ return MOSS.minNivel.puestos.indexOf(x.datos.nivel)>=0; }), brecha = mandos.filter(function(x){return x.brecha.length;});
+  var k = '<div class="kpi"><div class="l">Participantes</div><div class="v">'+n+'</div><div class="n">con cuestionario completo</div></div>';
+  k += '<div class="kpi acc"><div class="l">Global promedio</div><div class="v">'+Math.round(g)+'%</div><div class="n">'+mossNivel(Math.round(g))+'</div></div>';
+  k += '<div class="kpi"><div class="l">Área más alta</div><div class="v">'+(n?ord[0]:'—')+'</div><div class="n">'+(n?ar(ord[0]).corto+' · '+Math.round(am[ord[0]])+'%':'')+'</div></div>';
+  k += '<div class="kpi"><div class="l">Área más baja</div><div class="v">'+(n?ord[4]:'—')+'</div><div class="n">'+(n?ar(ord[4]).corto+' · '+Math.round(am[ord[4]])+'%':'')+'</div></div>';
+  var bajoHS = D.filter(function(x){return x.r.pct.HS<42;}).length;
+  k += '<div class="kpi"><div class="l">Supervisión bajo promedio</div><div class="v">'+(n?Math.round(100*bajoHS/n):0)+'%</div><div class="n">'+bajoHS+' personas con HS &lt; 42%</div></div>';
+  k += '<div class="kpi'+(brecha.length?' acc':'')+'"><div class="l">Mandos con brecha</div><div class="v">'+brecha.length+'</div><div class="n">de '+mandos.length+' con personal a cargo</div></div>';
+  $('kpis').innerHTML = k;
+  $('consKicker').textContent = n ? '«El grupo se ubica en nivel '+mossNivel(Math.round(g)).toLowerCase()+' ('+Math.round(g)+'%). Su área más alta es '+ar(ord[0]).corto.toLowerCase()+' y la más baja, '+ar(ord[4]).corto.toLowerCase()+'»' : 'Sin datos para los filtros seleccionados';
+  $('chAreas').innerHTML = svgAreas(A5.map(function(a){return {l:a+' · '+ar(a).corto, v:am[a], sub:mossNivel(Math.round(am[a]))};}).concat([{l:'Global', v:g, sub:mossNivel(Math.round(g)), bold:true}]));
+  // distribución
+  var h = '<table class="tbl"><thead><tr><th>Área</th>'+NIV.map(function(l){return '<th class="num">'+l+'</th>';}).join('')+'</tr></thead><tbody>';
+  A5.concat(['G']).forEach(function(a){ var c = {}; D.forEach(function(x){ var lv = a==='G'?x.r.nivelGlobal:x.r.nivel[a]; c[lv]=(c[lv]||0)+1; });
+    h += '<tr><td>'+(a==='G'?'<b>Global</b>':a+' · '+esc(ar(a).corto))+'</td>'+NIV.map(function(l,i){ var v=c[l]||0; return '<td class="num">'+(v?'<span class="lv b'+i+'">'+v+' ('+Math.round(100*v/n)+'%)</span>':'—')+'</td>'; }).join('')+'</tr>'; });
+  $('tblDist').innerHTML = h + '</tbody></table>';
+  renderSeg(D); renderTend(D); renderBrecha(brecha); renderItems(D); renderDisc(D); renderAlertas(D);
+}
+function renderSeg(D){
+  var by = $('grpBy').value, g = {};
+  D.forEach(function(x){ var key = x.datos[by]||'Sin dato'; (g[key]=g[key]||[]).push(x); });
+  var keys = Object.keys(g).sort(function(a,b){return g[b].length-g[a].length;});
+  var h = '<table class="tbl"><thead><tr><th>'+esc($('grpBy').selectedOptions[0].text)+'</th><th class="num">n</th>'+A5.map(function(a){return '<th class="num">'+a+' %</th>';}).join('')+'<th class="num">Global %</th><th>Nivel global</th><th>Área más baja</th></tr></thead><tbody>';
+  keys.forEach(function(k){ var L=g[k], m={}; A5.forEach(function(a){ m[a]=avg(L,function(x){return x.r.pct[a];}); }); var gl=avg(L,function(x){return x.r.pctGlobal;});
+    var lo = A5.slice().sort(function(a,b){return m[a]-m[b];})[0];
+    h += '<tr><td>'+esc(k)+(L.length<5?' *':'')+'</td><td class="num">'+L.length+'</td>'+A5.map(function(a){return '<td class="num"><span class="hm" style="background:'+hmA(m[a])+'">'+Math.round(m[a])+'</span></td>';}).join('')+'<td class="num"><b>'+Math.round(gl)+'</b></td><td>'+lvTag(mossNivel(Math.round(gl)))+'</td><td>'+lo+' · '+esc(ar(lo).corto)+'</td></tr>'; });
+  $('tblSeg').innerHTML = h + '</tbody></table>';
+}
+function renderTend(D){
+  var c = {}, tot = 0; D.forEach(function(x){ for (var t in x.r.errores){ c[t]=(c[t]||0)+x.r.errores[t]; tot+=x.r.errores[t]; } });
+  var ks = Object.keys(c).sort(function(a,b){return c[b]-c[a];});
+  $('chTend').innerHTML = tot ? svgBarsH(ks.map(function(t,i){ return {l:MOSS.tendencias[t][0], v:c[t], t:Math.round(100*c[t]/tot)+'%', hi:i<2}; })) : '<p>Sin respuestas no acertadas.</p>';
+}
+function renderBrecha(L){
+  $('tblBrecha').innerHTML = L.length ? '<table class="tbl"><thead><tr><th>Persona</th><th>Nivel</th><th>Puesto</th><th class="num">HS %</th><th class="num">CD %</th></tr></thead><tbody>'+L.slice(0,15).map(function(x){return '<tr><td>'+esc(x.datos.nombre+' '+x.datos.apellido)+'</td><td>'+esc(x.datos.nivel)+'</td><td>'+esc(x.datos.puesto)+'</td>'+['HS','CD'].map(function(a){return '<td class="num"><span class="hm" style="background:'+hmA(x.r.pct[a])+'">'+x.r.pct[a]+'</span></td>';}).join('')+'</tr>';}).join('')+'</tbody></table>'+(L.length>15?'<div class="src">… y '+(L.length-15)+' más (ver CSV).</div>':'') : '<p style="margin:0">Todos los mandos del grupo filtrado alcanzan el mínimo esperado en HS y CD.</p>';
+}
+function renderItems(D){
+  var n = D.length; if (!n){ $('tblItems').innerHTML=''; return; }
+  var rows = MOSS.items.map(function(it,i){ var ok=0, wr={}; D.forEach(function(x){ var r=x.r.items[i]; if(r.ok) ok++; else wr[r.resp]=(wr[r.resp]||0)+1; });
+    var top = Object.keys(wr).sort(function(a,b){return wr[b]-wr[a];})[0]; return {it:it, p:Math.round(100*ok/n), top:top, tn:top?wr[top]:0}; });
+  rows.sort(function(a,b){return a.p-b.p;});
+  $('tblItems').innerHTML = '<table class="tbl evid"><thead><tr><th>#</th><th>Situación</th><th>Área</th><th class="num">% acierto</th><th>Respuesta no acertada más elegida</th><th>Tendencia</th></tr></thead><tbody>'+rows.slice(0,10).map(function(r){
+    var it=r.it, L=r.top, tg=L?(MOSS.distractores[String(it.n)]||{})[L]:'';
+    return '<tr><td>'+it.n+'</td><td>'+esc(it.t)+'</td><td>'+it.area+'</td><td class="num">'+r.p+'%</td><td>'+(L?'<b>'+L+'.</b> '+esc(it.o['ABCD'.indexOf(L)])+' ('+r.tn+')':'—')+'</td><td>'+(tg?esc(MOSS.tendencias[tg][0]):'')+'</td></tr>'; }).join('')+'</tbody></table>';
+}
+function renderDisc(D){
+  if (!DISC){ $('tblDisc').innerHTML = '<p style="margin:0">No conectado. Para cruzar con DISC, abra el panel CLEAVER en este equipo o complete «Cruzar con resultados DISC» al entrar. El cruce se hace por número de identidad.</p>'; return; }
+  var con = D.filter(function(x){return x.disc;}), c = {};
+  con.forEach(function(x){ x.cruce.forEach(function(k){ (c[k.id]=c[k.id]||{k:k,L:[]}).L.push(x); }); });
+  var ks = Object.keys(c).sort(function(a,b){return c[b].L.length-c[a].L.length;});
+  $('tblDisc').innerHTML = '<p style="margin:0 0 8px">'+con.length+' de '+D.length+' personas tienen también resultado DISC.</p>' + (ks.length ? '<table class="tbl"><thead><tr><th>Combinación</th><th>Tipo</th><th class="num">Personas</th><th>Quiénes</th></tr></thead><tbody>'+ks.map(function(id){ var o=c[id]; return '<tr><td>'+esc(o.k.titulo)+'</td><td>'+(o.k.tipo==='riesgo'?'<span class="tag medio">Riesgo</span>':'<span class="tag alto">Fortaleza</span>')+'</td><td class="num">'+o.L.length+'</td><td>'+o.L.slice(0,10).map(function(x){return esc(x.datos.nombre+' '+x.datos.apellido);}).join(', ')+(o.L.length>10?'…':'')+'</td></tr>'; }).join('')+'</tbody></table><div class="src">Reglas de cruce DISC × MOSS: propuesta EREA. DISC alto/bajo = percentil del perfil Normal por encima/por debajo de 50; MOSS bajo = &lt; 42%, alto = ≥ 64%.</div>' : '<p style="margin:0">Sin combinaciones de riesgo o fortaleza en el grupo filtrado.</p>');
+}
+function renderAlertas(D){
+  var L = D.filter(function(x){return x.alq.length;});
+  $('tblAlertas').innerHTML = L.length ? '<table class="tbl"><thead><tr><th>Folio</th><th>Persona</th><th class="num">Duración (min)</th><th>Alerta</th></tr></thead><tbody>'+L.map(function(x){return '<tr><td>'+esc(x.folio)+'</td><td>'+esc(x.datos.nombre+' '+x.datos.apellido)+'</td><td class="num">'+esc(x.duracionMin)+'</td><td><span class="tag medio">'+esc(x.alq.join(' · '))+'</span></td></tr>';}).join('')+'</tbody></table><div class="src">Respuesta rápida: menos de '+MOSS.calidad.minMinutos+' minutos. Patrón de respuesta: misma letra en '+MOSS.calidad.maxMismaLetra+' o más situaciones, o secuencia A-B-C-D. ID repetido: la identidad ya había respondido.</div>' : '<p style="margin:0">Sin alertas de calidad en el grupo filtrado.</p>';
+}
+
+/* ---------------- individual ---------------- */
+var IND_LIST = [];
+$('search').oninput = renderInd;
+function renderInd(){
+  var q = ($('search').value||'').toLowerCase();
+  IND_LIST = DATA.filter(function(x){ return !q || JSON.stringify(x.datos).toLowerCase().indexOf(q)>=0 || String(x.folio).toLowerCase().indexOf(q)>=0; });
+  $('indCount').textContent = IND_LIST.length + ' personas';
+  $('tblInd').innerHTML = '<table class="tbl"><thead><tr><th>Folio</th><th>Nombre</th><th>ID</th><th>Área</th><th>Puesto</th><th>Nivel</th><th>Fecha</th><th class="num">Global</th><th>Nivel MOSS</th>'+A5.map(function(a){return '<th class="num">'+a+'</th>';}).join('')+'<th>Alerta</th></tr></thead><tbody>' +
+    IND_LIST.map(function(x,i){ var d=x.datos, r=x.r; return '<tr class="click" data-i="'+i+'"><td>'+esc(x.folio)+'</td><td>'+esc(d.nombre+' '+d.apellido)+'</td><td>'+esc(d.identidad)+'</td><td>'+esc(d.area)+'</td><td>'+esc(d.puesto)+'</td><td>'+esc(d.nivel)+'</td><td>'+fmtFecha(x.fecha)+'</td><td class="num"><b>'+r.pctGlobal+'%</b></td><td>'+lvTag(r.nivelGlobal)+'</td>'+A5.map(function(a){return '<td class="num"><span class="hm" style="background:'+hmA(r.pct[a])+'">'+r.pct[a]+'</span></td>';}).join('')+'<td>'+(x.alq.length||x.brecha.length?'<span class="tag medio">'+esc(x.alq.concat(x.brecha.length?['Brecha '+x.brecha.join('/')]:[]).join(' · '))+'</span>':'')+'</td></tr>'; }).join('') + '</tbody></table>';
+}
+$('tblInd').onclick = function(e){ var tr=e.target.closest('tr[data-i]'); if(!tr)return; showReports([IND_LIST[+tr.getAttribute('data-i')]]); };
+$('btnPrintAll').onclick = function(){ var D=filtered(); if(!D.length)return; if(D.length>80 && !confirm('Se prepararán '+D.length+' reportes para imprimir. ¿Continuar?'))return; showReports(D, true); };
+$('btnBack').onclick = function(){ $('vRep').hidden=true; var t=document.querySelector('#tabs button.on').getAttribute('data-tab'); tab(t); };
+function showReports(list, autoprint){
+  $('repBox').innerHTML = list.map(function(x,i){ return reportHTML(x) + (i<list.length-1?'<div class="pb"></div>':''); }).join('');
+  $('vCons').hidden = $('vInd').hidden = true; $('vRep').hidden = false; window.scrollTo(0,0);
+  if (autoprint) setTimeout(function(){ window.print(); }, 400);
+}
+
+/* ---------------- reporte individual (3 capas) ---------------- */
+function listaY(a){ return a.length<2 ? a.join('') : a.slice(0,-1).join(', ')+' y '+a[a.length-1]; }
+function reportHTML(x){
+  var d=x.datos, r=x.r, nm=d.nombre;
+  var who = [['Empresa',d.empresa],['Área',d.area],['Puesto',d.puesto],['Nivel',d.nivel],['Sede',d.sede],['ID',mask(d.identidad)],['Código',d.codigo],['Fecha de aplicación',fmtFecha(x.fecha)],['Duración',x.duracionMin!==''&&x.duracionMin!=null?String(x.duracionMin).replace('.',',')+' min':'']];
+  var h = '<article class="rep">';
+  h += '<div class="rhead"><div><div class="eyebrow">Reporte individual · MOSS · Adaptabilidad social</div><h1>'+esc(d.nombre+' '+d.apellido)+'</h1><div style="font-size:12px;color:#666">Folio '+esc(x.folio)+(x.edad!==''&&x.edad!=null?' · '+x.edad+' años':'')+'</div></div><div style="text-align:right"><img src="https://www.ereaconsulting.com/logo.svg" onerror="this.onerror=null;this.src=\'assets/logo-erea.png\'" alt="EREA"><div class="st" style="margin-top:8px">Confidencial</div></div></div>';
+  h += '<div class="who">'+who.filter(function(w){return w[1];}).map(function(w){return '<div><span>'+w[0]+'</span><b>'+esc(w[1])+'</b></div>';}).join('')+'</div>';
+  // Frase rectora
+  var fz = r.fuertes.map(function(a){return ar(a).corto.toLowerCase();}), db = r.debiles.map(function(a){return ar(a).corto.toLowerCase();});
+  var kick = 'Juicio en relaciones humanas en nivel '+r.nivelGlobal.toLowerCase()+' ('+r.pctGlobal+'%)';
+  var partes = [];
+  if (fz.length) partes.push((fz.length>1?'fortalezas en ':'fortaleza en ')+listaY(fz));
+  if (db.length) partes.push((db.length>1?'áreas críticas: ':'área crítica: ')+listaY(db));
+  kick += partes.length ? '. ' + partes.join('; ').replace(/^./, function(c){return c.toUpperCase();}) : '. Todas sus áreas en nivel Promedio';
+  h += '<div class="kicker">«'+esc(kick)+'»</div>';
+  // Calidad
+  x.cal.forEach(function(q){ h += '<div class="alerta r"><b>Alerta de calidad · '+esc(q.tipo)+'.</b> '+esc(q.desc)+'</div>'; });
+  if (x.idRep) h += '<div class="alerta r"><b>Alerta de calidad · ID repetido.</b> Esta identidad ya había respondido con el folio '+esc(x.idRep)+'. Confirmar cuál registro es válido.</div>';
+  // CAPA 1 · calificación del manual
+  h += '<div class="sec"><h3>1. Resultado por área</h3><div class="areas5">'+A5.map(function(a){ var b=r.banda[a]; return '<div class="'+(b==='alto'?'hi':(b==='bajo'?'lo':''))+'"><div class="l">'+a+' · '+esc(ar(a).corto)+'</div><div class="p">'+r.pct[a]+'%</div><div class="n">'+r.aciertos[a]+' de '+r.n[a]+' aciertos</div><div style="margin-top:4px">'+lvTag(r.nivel[a])+'</div></div>'; }).join('')+'</div>';
+  h += svgAreas(A5.map(function(a){return {l:a+' · '+ar(a).corto, v:r.pct[a], sub:r.nivel[a]};}).concat([{l:'Global · '+r.total+' de 30', v:r.pctGlobal, sub:r.nivelGlobal, bold:true}]));
+  h += '<div class="src">Porcentaje de aciertos y nivel según la gráfica de resultados del manual MOSS (7 niveles). Cada área tiene entre 5 y 8 situaciones: un acierto mueve el resultado entre 12 y 20 puntos.</div></div>';
+  // Lectura por área
+  h += '<div class="sec flow"><h3>2. Lectura por área</h3><div class="lect">'+A5.map(function(a){ var A=ar(a), b=r.banda[a]; return '<div class="'+b+'"><h4><span>'+a+' · '+esc(A.nombre)+'</span>'+lvTag(r.nivel[a])+'</h4><div class="d">'+esc(A.def)+'</div><p>'+esc(A[b])+'</p></div>'; }).join('')+'</div></div>';
+  // CAPA 2 · patrón en errores
+  var mal = r.items.filter(function(i){return !i.ok;});
+  h += '<div class="sec flow"><h3>3. Cómo resuelve cuando no acierta</h3>';
+  if (!mal.length) h += '<p>Acertó las 30 situaciones.</p>';
+  else {
+    var ts = Object.keys(r.errores).sort(function(a,b){return r.errores[b]-r.errores[a];});
+    h += '<div class="tend">'+ts.map(function(t){ return '<span class="'+(t===r.patron||t===r.patron2?'top':'')+'">'+esc(MOSS.tendencias[t][0])+' · '+r.errores[t]+'</span>'; }).join('')+'</div>';
+    if (r.patron) h += '<p><b>Patrón principal: '+esc(MOSS.tendencias[r.patron][0].toLowerCase())+'.</b> '+esc(MOSS.tendencias[r.patron][1])+' ('+r.errores[r.patron]+' de '+mal.length+' respuestas no acertadas)'+(r.patron2?'; en segundo lugar, '+esc(MOSS.tendencias[r.patron2][0].toLowerCase())+' ('+r.errores[r.patron2]+')':'')+'.</p>';
+    else h += '<p>Sus respuestas no acertadas no muestran un patrón dominante: se reparten entre varias tendencias.</p>';
+    h += '<div class="wrap"><table class="tbl evid"><thead><tr><th>#</th><th>Situación</th><th>Área</th><th>Eligió</th><th>Respuesta más acertada</th><th>Tendencia</th></tr></thead><tbody>'+mal.map(function(i){ var it=MOSS.items[i.n-1];
+      return '<tr><td>'+i.n+'</td><td>'+esc(it.t)+'</td><td>'+i.area+'</td><td><b>'+i.resp+'.</b> '+esc(it.o['ABCD'.indexOf(i.resp)]||'')+'</td><td class="ok"><b>'+i.clave+'.</b> '+esc(it.o['ABCD'.indexOf(i.clave)])+'</td><td>'+(i.tag?esc(MOSS.tendencias[i.tag][0]):'')+'</td></tr>'; }).join('')+'</tbody></table></div>';
+    h += '<div class="src">Lectura EREA de las respuestas no acertadas: cada opción incorrecta expresa una tendencia (imponer, ceder, evitar, trasladar, etc.). Es una guía para la entrevista, no un diagnóstico.</div>';
+  }
+  h += '</div>';
+  // CAPA 3 · cruce con DISC y con el puesto
+  h += '<div class="sec flow"><h3>4. Cruce con el puesto y con DISC</h3>';
+  if (MOSS.minNivel.puestos.indexOf(d.nivel)>=0) h += x.brecha.length ? '<div class="cruce"><b>Brecha para su nivel ('+esc(d.nivel)+').</b> En puestos con personal a cargo se espera al menos nivel Promedio en Supervisión (HS) y Decisión (CD); está por debajo en '+x.brecha.map(function(a){return a+' ('+r.pct[a]+'%)';}).join(' y ')+'.</div>' : '<div class="cruce fortaleza"><b>Cumple el mínimo esperado para su nivel ('+esc(d.nivel)+').</b> Supervisión '+r.pct.HS+'% y Decisión '+r.pct.CD+'%, ambas en nivel Promedio o superior.</div>';
+  else h += '<p>Su nivel jerárquico ('+esc(d.nivel||'sin dato')+') no tiene personal a cargo: el resultado orienta su potencial para un futuro rol de supervisión.</p>';
+  if (x.disc){ var n4=x.disc.normal;
+    h += '<p style="margin:10px 0 2px"><b>DISC (perfil Normal, folio '+esc(x.disc.folio)+'):</b> '+esc(x.disc.comb.clave+' · '+(x.disc.comb.tipo||''))+'</p><div class="disc4">'+['D','I','S','C'].map(function(f){return '<span>'+f+' <b>'+n4[f]+'</b></span>';}).join('')+'</div>';
+    h += x.cruce.length ? x.cruce.map(function(c){return '<div class="cruce '+c.tipo+'"><b>'+(c.tipo==='riesgo'?'Riesgo':'Fortaleza')+' · '+esc(c.titulo)+'.</b> '+esc(c.txt)+'</div>';}).join('') : '<p>La combinación de su estilo DISC con sus resultados MOSS no activa ninguna regla de riesgo o fortaleza.</p>';
+  } else if (DISC) h += '<p style="font-size:13px;color:#666">No se encontró un resultado DISC con su número de identidad.</p>';
+  h += '</div>';
+  // Recomendaciones
+  var foco = r.debiles.slice(0,2); if (!foco.length) foco = A5.slice().filter(function(a){return r.pct[a]<64;}).sort(function(a,b){return r.pct[a]-r.pct[b];}).slice(0,1);
+  h += '<div class="sec flow"><h3>5. Desarrollo y validación</h3>';
+  if (!foco.length) h += '<p>Todas sus áreas están por encima del promedio. Recomendación: aprovecharlo como referente o mentor en manejo de personas y validar en entrevista con ejemplos recientes.</p>';
+  else h += '<div class="recs">'+foco.map(function(a){ var A=ar(a); return '<div><h4>'+a+' · '+esc(A.nombre)+' ('+r.pct[a]+'%)</h4><div class="eyebrow" style="margin-top:6px">Acciones de desarrollo</div><ol>'+A.dev.map(function(t){return '<li>'+esc(t)+'</li>';}).join('')+'</ol><div class="eyebrow" style="margin-top:10px">Preguntas para la entrevista de validación</div><ul>'+A.preg.map(function(t){return '<li>'+esc(t)+'</li>';}).join('')+'</ul></div>'; }).join('')+'</div>';
+  h += '</div>';
+  h += '<div class="metodo"><b>Nota metodológica.</b> '+esc(MOSS.limitaciones)+' Las lecturas de tendencias, el mínimo por nivel y el cruce con DISC son criterios de EREA Consulting.</div>';
+  h += '<div class="rfoot"><span>Está prohibida su reproducción total o parcial sin la autorización por escrito de EREA Consulting.</span><span>Documento confidencial</span></div>';
+  return h + '</article>';
+}
+
+/* ---------------- CSV ---------------- */
+$('btnCsv').onclick = function(){
+  var D = filtered(), cols = ['folio','fecha','inicio','fin','duracionMin','ip','empresa','nombre','apellido','identidad','codigo','area','puesto','sede','nivel','fecha_nacimiento','edad','genero','antiguedad'];
+  var head = cols.concat(A5.map(function(a){return a+'_aciertos';}), A5.map(function(a){return a+'_pct';}), A5.map(function(a){return a+'_nivel';}), ['aciertos_30','global_pct','nivel_global','fortalezas','areas_desarrollo','patron_errores','brecha_nivel','disc_comb','cruce_disc','alerta_calidad'], MOSS.items.map(function(it){return 'P'+it.n;}));
+  var rows = D.map(function(x){ var r=x.r; var row = cols.map(function(c){ return ['folio','fecha','inicio','fin','duracionMin','ip','edad'].indexOf(c)>=0?x[c]:x.datos[c]; });
+    return row.concat(A5.map(function(a){return r.aciertos[a];}), A5.map(function(a){return r.pct[a];}), A5.map(function(a){return r.nivel[a];}),
+      [r.total, r.pctGlobal, r.nivelGlobal, r.fuertes.join(' '), r.debiles.join(' '), [r.patron,r.patron2].filter(String).map(function(t){return MOSS.tendencias[t][0];}).join(' · '), x.brecha.join(' '), x.disc?x.disc.comb.clave:'', (x.cruce||[]).map(function(c){return c.titulo;}).join(' · '), x.alq.join(' · ')], x.resp); });
+  var csv = '﻿' + [head].concat(rows).map(function(r){return r.map(function(v){v=v==null?'':String(v);return /[";\n,]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;}).join(',');}).join('\n');
+  var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})); a.download = 'MOSS_resultados.csv'; a.click();
+};
+</script>
+</body>
+</html>

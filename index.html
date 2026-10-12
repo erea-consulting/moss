@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Evaluación MOSS · Adaptabilidad social y habilidad gerencial · EREA Consulting</title>
+<meta name="description" content="Cuestionario MOSS de EREA Consulting: juicio en las relaciones humanas para puestos con personal a cargo. 30 situaciones, 20 a 30 minutos. Respuestas confidenciales.">
+<meta property="og:title" content="Evaluación MOSS · Habilidad gerencial en relaciones humanas · EREA Consulting">
+<meta property="og:description" content="Cuestionario MOSS de EREA Consulting: juicio en las relaciones humanas para puestos con personal a cargo. 30 situaciones, 20 a 30 minutos. Respuestas confidenciales.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EREA Consulting">
+<meta property="og:image" content="https://erea-consulting.github.io/moss/assets/logo-erea.png">
+<meta property="og:url" content="https://erea-consulting.github.io/moss/">
+<link rel="icon" href="assets/logo-erea.png">
+<style>
+
+:root{--field:#0D5E4B;--acc:#0D8B7D;--ui:#267058;--soft:#E6F2EE;--ink:#1A1A1A;--body:#333333;--mute:#666666;--line:#DBE4DD;--line2:#C4D1C7;--neg:#B4543A;--alert:#F4A833;--bg:#FFFFFF;--card:#FFFFFF}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg)}
+body{font-family:Arial,Helvetica,sans-serif;color:var(--body);font-size:16px;line-height:1.5;min-height:100vh;display:flex;flex-direction:column}
+.hdr{border-bottom:3px solid var(--acc);background:var(--bg);position:sticky;top:0;z-index:20}
+.hdr .row{max-width:760px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:14px}
+.hdr img{height:34px;width:auto}
+.hdr .ttl{flex:1;min-width:0;text-align:right}
+.hdr .ttl b{display:block;color:var(--ink);font-size:14px}
+.hdr .ttl span{font-size:12px;color:var(--mute)}
+.prog{height:4px;background:var(--line)}
+.prog i{display:block;height:100%;width:0;background:var(--acc);transition:width .25s}
+main{flex:1;width:100%;max-width:760px;margin:0 auto;padding:24px 16px 40px}
+.eyebrow{font-size:11px;letter-spacing:.22em;font-weight:bold;color:var(--acc);text-transform:uppercase;margin-bottom:6px}
+h1{font-size:28px;line-height:1.2;color:var(--ink);margin:0 0 8px;text-transform:uppercase}
+h2{font-size:22px;line-height:1.3;color:var(--ink);margin:0 0 6px}
+h2:after,h1:after{content:"";display:block;width:64px;height:3px;background:var(--acc);margin-top:12px}
+p{margin:10px 0}
+.lead{font-size:17px;color:var(--body)}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
+.meta>div{border:1px solid var(--line);border-top:3px solid var(--acc);border-radius:3px;padding:10px 14px;flex:1;min-width:140px}
+.meta .l{font-size:10px;letter-spacing:.18em;color:var(--mute);font-weight:bold;text-transform:uppercase}
+.meta .v{font-size:18px;font-weight:bold;color:var(--ink)}
+.box{background:var(--soft);border-left:4px solid var(--acc);padding:14px 18px;border-radius:3px;margin:18px 0;font-size:15px}
+.box.warn{border-left-color:var(--alert);background:#FDF5E6}
+.box.err{border-left-color:var(--neg);background:#F8ECE8;color:var(--ink)}
+ol.obs{padding-left:22px;margin:8px 0}ol.obs li{margin:6px 0}
+.check{display:flex;gap:12px;align-items:flex-start;margin:18px 0;font-size:15px;cursor:pointer}
+.check input{width:22px;height:22px;flex:none;margin-top:1px;accent-color:var(--acc)}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:14px 18px;margin-top:18px}
+.f{display:flex;flex-direction:column;gap:5px}
+.f.full{grid-column:1/-1}
+.f label{font-size:13px;font-weight:bold;color:var(--ink)}
+.f label .req{color:var(--neg)}
+.f input,.f select{font:inherit;font-size:16px;padding:11px 12px;border:1px solid var(--line2);border-radius:3px;background:var(--card);color:var(--ink);width:100%}
+.f input:focus,.f select:focus{outline:2px solid var(--acc);outline-offset:0;border-color:var(--acc)}
+.f input[readonly]{background:var(--soft);color:var(--mute)}
+.f.bad input,.f.bad select{border-color:var(--neg)}
+.f .hint{font-size:12px;color:var(--neg);min-height:0}
+.nav{display:flex;gap:12px;justify-content:space-between;align-items:center;margin-top:26px}
+.btn{font:inherit;font-size:16px;font-weight:bold;padding:13px 26px;border-radius:3px;border:1px solid var(--acc);background:var(--acc);color:#fff;cursor:pointer;min-width:140px}
+.btn:hover{background:var(--field);border-color:var(--field)}
+.btn.sec{background:var(--card);color:var(--ui);border-color:var(--line2)}
+.btn.sec:hover{background:var(--soft)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.counter{font-size:13px;color:var(--mute)}
+.sum{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:16px 0}
+.sum button{font:inherit;font-size:13px;padding:8px 0;border:1px solid var(--line2);border-radius:3px;background:var(--card);cursor:pointer;color:var(--ink)}
+.sum button.ok{background:var(--soft);border-color:var(--acc);color:var(--field);font-weight:bold}
+.sum button.no{border-color:var(--neg);color:var(--neg);font-weight:bold}
+.done{text-align:center;padding:30px 0}
+.done .mark{width:72px;height:72px;border-radius:50%;background:var(--acc);color:#fff;font-size:38px;line-height:72px;margin:0 auto 18px}
+.done h2:after{margin-left:auto;margin-right:auto}
+.folio{display:inline-block;margin-top:10px;padding:8px 16px;border:1px dashed var(--acc);border-radius:3px;font-weight:bold;color:var(--field);letter-spacing:.08em}
+.demo{background:#FDF5E6;border-bottom:1px solid var(--alert);color:var(--ink);font-size:13px;text-align:center;padding:6px 12px}
+footer{border-top:1px solid var(--line);padding:16px;text-align:center;font-size:12px;color:var(--mute)}
+footer b{color:var(--field)}
+[hidden]{display:none!important}
+@media (max-width:600px){
+ h1{font-size:23px}h2{font-size:20px}
+ .form{grid-template-columns:1fr}
+ .btn{min-width:0;flex:1;padding:13px 14px}
+ .sum{grid-template-columns:repeat(4,1fr)}
+}
+
+.qhead{text-align:left;margin:4px 0 0}
+.qhead .qn{font-size:13px;letter-spacing:.18em;font-weight:bold;color:var(--acc);text-transform:uppercase;margin:0}
+.qtext{font-size:20px;line-height:1.45;color:var(--ink);margin:10px 0 18px}
+.opts{display:flex;flex-direction:column;gap:10px}
+.op{display:flex;gap:14px;align-items:flex-start;border:1px solid var(--line2);border-radius:3px;padding:14px 16px;cursor:pointer;background:var(--card);transition:border-color .12s,background .12s}
+.op:hover{border-color:var(--acc)}
+.op input{position:absolute;opacity:0;pointer-events:none}
+.op .lt{flex:none;width:34px;height:34px;border-radius:50%;border:2px solid var(--line2);background:var(--soft);display:flex;align-items:center;justify-content:center;font-weight:bold;color:var(--ui);font-size:15px}
+.op .tx{font-size:17px;line-height:1.4;color:var(--body);padding-top:5px}
+.op.on{border-color:var(--acc);background:var(--soft)}
+.op.on .lt{background:var(--acc);border-color:var(--acc);color:#fff}
+.op.on .tx{color:var(--ink);font-weight:bold}
+.op:focus-within{outline:2px solid var(--acc);outline-offset:1px}
+.sum{grid-template-columns:repeat(10,1fr)}
+kbd{display:inline-block;min-width:22px;padding:1px 6px;border:1px solid var(--line2);border-bottom-width:2px;border-radius:3px;background:var(--card);font:bold 13px Arial,Helvetica,sans-serif;color:var(--ink);text-align:center;line-height:18px}
+.khint{font-size:13px;color:var(--mute);margin:0 0 8px;text-align:center}
+/* Barra fija de navegación en las preguntas: Teclado, Atrás y Siguiente no se mueven entre situaciones */
+.qfoot{position:fixed;left:0;right:0;bottom:0;z-index:15;background:var(--bg);border-top:1px solid var(--line);box-shadow:0 -4px 14px rgba(0,0,0,.06)}
+.qfoot .in{max-width:760px;margin:0 auto;padding:12px 16px calc(14px + env(safe-area-inset-bottom))}
+.qfoot .nav{margin-top:0;height:52px;flex-wrap:nowrap}
+.qfoot .btn{white-space:nowrap;height:48px;padding-top:0;padding-bottom:0}
+@media (max-width:420px){.qfoot .counter{font-size:12px}.qfoot .btn{padding-left:10px;padding-right:10px;font-size:15px}}
+.qfoot .counter{white-space:nowrap;text-align:center;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis}
+body.qmode main{padding-bottom:170px}
+body.qmode footer{display:none}
+@media (hover:none),(pointer:coarse){.kbd-only{display:none!important}}
+@media (max-width:600px){
+ .qtext{font-size:18px}
+ .op .tx{font-size:16px}
+ .sum{grid-template-columns:repeat(6,1fr)}
+}
+</style>
+</head>
+<body>
+<div class="demo" id="demoBar" hidden>Modo demostración: falta configurar el destino de datos. Las respuestas no se guardarán.</div>
+<header class="hdr">
+ <div class="row">
+  <img src="https://www.ereaconsulting.com/logo.svg" alt="EREA Consulting Group" onerror="this.onerror=null;this.src='assets/logo-erea.png'">
+  <div class="ttl"><b>Cuestionario MOSS</b><span id="hdrEmpresa">Habilidad gerencial en relaciones humanas</span></div>
+ </div>
+ <div class="prog"><i id="progBar"></i></div>
+</header>
+
+<main id="app">
+
+ <!-- 0. PORTADA -->
+ <section data-step="portada">
+  <div class="eyebrow">Evaluación de adaptabilidad social</div>
+  <h1>Cuestionario MOSS</h1>
+  <p class="lead">Este cuestionario explora cómo resuelve situaciones cotidianas con otras personas: cómo se relaciona, cómo interpreta un conflicto, cómo decide cuando hay personas de por medio y cómo dirige a un equipo.</p>
+  <div class="meta">
+   <div><div class="l">Duración</div><div class="v">20 a 30 min</div></div>
+   <div><div class="l">Situaciones</div><div class="v">30</div></div>
+   <div><div class="l">Organización</div><div class="v" id="metaEmpresa">—</div></div>
+  </div>
+  <div class="box">
+   <b>Confidencialidad.</b> Sus respuestas son confidenciales. Solo el equipo consultor de EREA Consulting tendrá acceso a los resultados individuales, que se usarán exclusivamente con fines de desarrollo organizacional.
+  </div>
+  <label class="check"><input type="checkbox" id="consent"><span>He leído la información anterior y acepto participar de forma voluntaria y que mis respuestas sean procesadas por EREA Consulting para los fines descritos.</span></label>
+  <div class="box err" id="pendingBox" hidden></div>
+  <div class="nav"><span></span><button class="btn" id="btnStart" disabled>Comenzar</button></div>
+ </section>
+
+ <!-- 1. DATOS -->
+ <section data-step="datos" hidden>
+  <div class="eyebrow">Paso 1 de 3</div>
+  <h2>Datos del participante</h2>
+  <p>Complete sus datos tal como aparecen en los registros de la empresa.</p>
+  <form class="form" id="formDatos" autocomplete="on" onsubmit="return false"></form>
+  <div class="nav"><button class="btn sec" data-go="portada">Atrás</button><button class="btn" id="btnDatos">Continuar</button></div>
+ </section>
+
+ <!-- 2. INSTRUCCIONES -->
+ <section data-step="instrucciones" hidden>
+  <div class="eyebrow">Paso 2 de 3</div>
+  <h2>Instrucciones</h2>
+  <p>A continuación encontrará <b>30 situaciones</b>. Para cada una se sugieren <b>cuatro respuestas</b>. Elija la que usted considere <b>más acertada</b>. Solo puede marcar una respuesta por situación.</p>
+  <div class="box"><b>Ejemplo.</b> Si ante una situación considera que la mejor reacción es la opción <b>C</b>, toque esa opción; quedará resaltada. Puede cambiarla mientras no haya enviado el cuestionario.</div>
+  <div class="box kbd-only"><b>Si responde desde una computadora</b>, puede usar el teclado: presione <kbd>A</kbd> <kbd>B</kbd> <kbd>C</kbd> <kbd>D</kbd> o <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd> para marcar la opción, y <kbd>Enter</kbd> para pasar a la siguiente situación.</div>
+  <p style="font-weight:bold;color:var(--ink);margin-top:20px">Observaciones importantes</p>
+  <ol class="obs">
+   <li>La prueba toma de 20 a 30 minutos. Busque un espacio tranquilo para completarla sin interrupciones.</li>
+   <li>Debe contestar las 30 situaciones y luego presionar <b>Enviar</b>. Si no presiona Enviar, sus respuestas no quedan registradas. Si la página se cierra por accidente, al volver a abrirla en este mismo dispositivo podrá continuar donde quedó.</li>
+   <li>Lea cada situación completa y las cuatro opciones antes de elegir.</li>
+   <li>Algunas situaciones no son del ámbito laboral o pueden parecerle lejanas. Responda igualmente con lo que considere más acertado.</li>
+   <li>Elija lo que considere <b>más acertado</b>, no lo que haría por costumbre ni lo que cree que se espera de usted.</li>
+   <li>No hay tiempo límite, pero no emplee demasiado tiempo en una sola situación.</li>
+  </ol>
+  <div class="nav"><button class="btn sec" data-go="datos">Atrás</button><button class="btn" id="btnInstr">Empezar el cuestionario</button></div>
+ </section>
+
+ <!-- 3. PREGUNTAS -->
+ <section data-step="preguntas" hidden>
+  <div class="qhead"><p class="qn" id="qEyebrow">Situación 1 de 30</p></div>
+  <p class="qtext" id="qText"></p>
+  <div class="opts" id="qBox" role="radiogroup"></div>
+  <div class="box err" id="qErr" hidden></div>
+  <div class="qfoot"><div class="in">
+   <p class="khint kbd-only">Teclado: <kbd>A</kbd>–<kbd>D</kbd> o <kbd>1</kbd>–<kbd>4</kbd> para marcar · <kbd>Enter</kbd> para continuar</p>
+   <div class="nav"><button class="btn sec" id="btnPrev">Atrás</button><span class="counter" id="qCounter"></span><button class="btn" id="btnNext">Siguiente</button></div>
+  </div></div>
+ </section>
+
+ <!-- 4. REVISIÓN -->
+ <section data-step="revision" hidden>
+  <div class="eyebrow">Revisión final</div>
+  <h2>Todo listo para enviar</h2>
+  <p>Estas son las 30 situaciones. Puede tocar cualquiera para revisarla antes de enviar.</p>
+  <div class="sum" id="sumBox"></div>
+  <div class="box err" id="sendErr" hidden></div>
+  <div class="nav"><button class="btn sec" id="btnBackQ">Atrás</button><button class="btn" id="btnSend">Enviar respuestas</button></div>
+ </section>
+
+ <!-- 5. FIN -->
+ <section data-step="fin" hidden>
+  <div class="done">
+   <div class="mark">&#10003;</div>
+   <div class="eyebrow">Cuestionario completado</div>
+   <h2>Gracias por su participación</h2>
+   <p id="finMsg">Sus respuestas fueron registradas correctamente. Ya puede cerrar esta página.</p>
+   <div class="folio" id="finFolio" hidden></div>
+  </div>
+ </section>
+
+</main>
+
+<footer>Está prohibida su reproducción total o parcial sin la autorización por escrito de <b>EREA Consulting</b>.</footer>
+
+<script>
+/* ================== CONFIGURACIÓN (editar aquí) ================== */
+var CONFIG = {
+  // URL de la aplicación web de Google Apps Script (termina en /exec)
+  endpoint: 'https://script.google.com/macros/s/AKfycbwTYeDnJZjF_W_-h5wQb14k34qIxSjaXn8wM7vwP4ly5KwxnDROguvXcBZrP0MszBdx/exec',
+  prueba: 'MOSS',
+  version: '1.3',
+  // Campos del participante (idénticos al CLEAVER). visible:false los oculta; requerido:false los vuelve opcionales.
+  // Cualquier campo se puede precargar por URL: ?empresa=Bomohsa&sede=Tegucigalpa y bloquear con &bloquear=empresa,sede
+  campos: [
+    {id:'empresa',  etiqueta:'Empresa',              tipo:'text',   visible:true,  requerido:true,  opciones:[]},
+    {id:'nombre',   etiqueta:'Nombre(s)',            tipo:'text',   visible:true,  requerido:true,  opciones:[], auto:'given-name'},
+    {id:'apellido', etiqueta:'Apellido(s)',          tipo:'text',   visible:true,  requerido:true,  opciones:[], auto:'family-name'},
+    {id:'identidad',etiqueta:'Número de identidad (ID)', tipo:'text', visible:true, requerido:true, opciones:[]},
+    {id:'codigo',   etiqueta:'Código de empleado',   tipo:'text',   visible:true,  requerido:false, opciones:[]},
+    {id:'area',     etiqueta:'Área',                 tipo:'text',   visible:true,  requerido:true,  opciones:[]},
+    {id:'puesto',   etiqueta:'Puesto',               tipo:'text',   visible:true,  requerido:true,  opciones:[]},
+    {id:'sede',     etiqueta:'Sede',                 tipo:'text',   visible:true,  requerido:true,  opciones:[]},
+    {id:'nivel',    etiqueta:'Nivel jerárquico',     tipo:'select', visible:true,  requerido:true,
+       opciones:['Operativo','Administrativo / Técnico','Supervisión / Coordinación','Jefatura','Gerencia','Dirección']},
+    {id:'fecha_nacimiento', etiqueta:'Fecha de nacimiento', tipo:'date', visible:true, requerido:false, opciones:[]},
+    {id:'genero',   etiqueta:'Género',               tipo:'select', visible:true,  requerido:false, opciones:['Femenino','Masculino','Prefiero no decir']},
+    {id:'antiguedad', etiqueta:'Antigüedad en la empresa', tipo:'select', visible:true, requerido:false,
+       opciones:['Menos de 1 año','1 a 3 años','3 a 5 años','5 a 10 años','Más de 10 años']}
+  ]
+};
+/* ================================================================ */
+
+var ITEMS = [{"p": "Se le ha asignado un puesto en una gran empresa. La mejor forma de establecer relaciones amistosas y cordiales con sus nuevos compañeros será:", "o": ["Evitando tomar nota de los errores que ellos cometan.", "Hablando bien de ellos al jefe.", "Mostrando interés en el trabajo de ellos.", "Pidiéndoles que le permitan hacer los trabajos que usted puede hacer mejor."]}, {"p": "Tiene usted un empleado muy eficiente, pero que constantemente se queja del trabajo; sus quejas producen mal efecto en los demás empleados. Lo mejor sería:", "o": ["Pedir a los demás empleados que traten de no hacerle caso.", "Averiguar la causa de esa actitud y procurar su modificación.", "Cambiarlo de departamento, donde quede a cargo de otro jefe.", "Permitirle planear lo más posible acerca de su trabajo."]}, {"p": "Un empleado de 60 años, que ha sido leal a la empresa durante 25 años, se queja de exceso de trabajo. Lo mejor sería:", "o": ["Decirle que vuelva a su trabajo so pena de cese.", "Despedirlo, sustituyéndolo por alguien más joven.", "Darle un aumento de sueldo que evite que continúe quejándose.", "Aminorar su trabajo."]}, {"p": "Uno de los socios, sin autoridad sobre usted, le ordena que haga algo en forma totalmente distinta de lo que usted planeaba. ¿Qué haría usted?", "o": ["Acatar la orden y no armar mayor revuelo.", "Ignorar las indicaciones y hacer lo que usted había planeado.", "Decirle que éste no es su asunto y que usted hará las cosas a su modo.", "Decirle que lo haga él mismo."]}, {"p": "Usted visita a un amigo íntimo que ha estado enfermo por algún tiempo. Lo mejor sería:", "o": ["Platicarle sus diversiones recientes.", "Platicarle noticias referentes a amigos mutuos.", "Comentar su enfermedad.", "Enfatizarle mucho que le apena verlo enfermo."]}, {"p": "Usted trabaja en una industria y su jefe quiere que tome un curso relacionado con su trabajo, pero éste es incompatible con el horario nocturno de su carrera universitaria. Usted decide:", "o": ["Continuar normalmente su carrera e informar al jefe si le pregunta.", "Explicarle la situación y obtener su opinión en cuanto a la importancia relativa de ambas situaciones.", "Dejar la universidad en atención a los intereses del trabajo.", "Asistir en forma alterna y no hacer comentarios."]}, {"p": "Un agente viajero con 15 años de antigüedad decide, presionado por su familia, sentar raíces, y se le transfiere a las oficinas generales. Es de esperar que:", "o": ["Guste de lo descansado de la oficina.", "Se sienta inquieto por la rutina de la oficina.", "Busque otro trabajo.", "Resulte muy eficiente en el trabajo de oficina."]}, {"p": "Tiene dos invitados a cenar, uno radical y el otro conservador. Surge una acalorada discusión con respecto a la política. Lo mejor sería:", "o": ["Tomar partido.", "Intentar cambiar de tema.", "Intervenir dando sus propios puntos de vista y mostrar dónde ambos pecan de extremosos.", "Pedir que cambien de tema para evitar mayor discusión."]}, {"p": "Un joven invita a una dama al teatro; al llegar se percata de que ha olvidado su cartera. Sería mejor:", "o": ["Tratar de obtener los boletos dejando el reloj en prenda.", "Buscar a un amigo a quien pedirle prestado.", "Decidir de acuerdo con ella lo procedente.", "Dar una excusa plausible para ir a casa por dinero."]}, {"p": "Usted ha tenido experiencia como vendedor y acaba de conseguir otro trabajo en una tienda grande. La mejor forma de relacionarse con los empleados del departamento sería:", "o": ["Permitirles la mayoría de las ventas durante unos días, en tanto observa sus métodos.", "Tratar de instituir los métodos que a usted le fueron útiles.", "Adaptarse a las condiciones y aceptar consejos de sus compañeros.", "Pedir al jefe todo el consejo necesario."]}, {"p": "Usted es un joven empleado que va a comer con una maestra a quien conoce superficialmente. Lo mejor sería iniciar la conversación acerca de:", "o": ["Algún tópico de actualidad y de interés general.", "Algún aspecto interesante de su propio trabajo.", "Las tendencias actuales en el terreno docente.", "Las sociedades de padres de familia."]}, {"p": "Una señora de especiales méritos, que por largo tiempo ha dirigido trabajos benéficos dejando las labores de la casa a cargo de la servidumbre, se cambia a otra población. Es de esperarse que ella:", "o": ["Se sienta insatisfecha de su nuevo hogar.", "Se interese más en los trabajos domésticos.", "Intervenga poco a poco en la vida de la comunidad.", "Adopte nuevos intereses en la nueva comunidad."]}, {"p": "Usted quiere pedirle un favor a un desconocido con quien tiene poca confianza. La mejor forma de lograrlo sería:", "o": ["Haciéndole creer que será él quien se beneficie más.", "Enfatizar la importancia que para usted tiene el que le conceda el favor.", "Ofrecer algo en retribución.", "Decir lo que desea en forma breve, indicando los motivos."]}, {"p": "Un joven de 24 años gasta bastante tiempo y dinero en diversiones; se le ha hecho ver que así no logrará el éxito en el trabajo. Probablemente cambie sus costumbres si:", "o": ["Sus hábitos nocturnos lesionan su salud.", "Sus amigos enfatizan el daño que se hace a sí mismo.", "Su jefe se da cuenta y lo previene.", "Se interesa en el desarrollo de alguna fase de su trabajo."]}, {"p": "Después de haberle hecho un gran número de favores a un amigo, éste da por hecho que será usted quien le resuelva todas sus pequeñas dificultades. La mejor forma de readaptar la situación sin ofenderlo sería:", "o": ["Explicarle el daño que se está causando a sí mismo.", "Pedirle a un amigo mutuo que trate de arreglar las cosas.", "Ayudarle una vez más, de tal manera que sienta que hubiera sido mejor no haberlo solicitado.", "Dar una excusa para no seguir ayudándolo."]}, {"p": "Una persona recién ascendida a un puesto de autoridad lograría mejor sus metas y la buena voluntad de los empleados:", "o": ["Tratando de que cada empleado entienda qué es la verdadera eficiencia.", "Ascendiendo cuanto antes a quienes considera que lo merecen.", "Preguntando confidencialmente a cada empleado sobre los cambios que estima necesarios.", "Siguiendo los sistemas del anterior jefe y haciendo gradualmente los cambios necesarios."]}, {"p": "Usted vive a 15 km del centro y se ha ofrecido a llevar de regreso a un vecino a las 4:00 p. m.; él lo espera desde las 3:00 p. m. Justo a las 4:00 p. m. usted se entera de que no podrá salir antes de las 5:30 p. m. Sería mejor:", "o": ["Pedirle un taxi.", "Explicarle y dejar que él decida.", "Pedirle que espere hasta las 5:30 p. m.", "Proponerle que se lleve su auto."]}, {"p": "Usted es un ejecutivo y dos de sus empleados se llevan mal; ambos son eficientes. Lo mejor sería:", "o": ["Despedir al menos eficiente.", "Darles trabajo en común que les interese a ambos.", "Hacerles ver el daño que se hacen mutuamente.", "Darles trabajos distintos."]}, {"p": "Ballesteros ha conservado su trabajo como subordinado por 10 años; desempeña su trabajo callada y confiablemente, y se le extrañará cuando se vaya. Si obtiene trabajo en otra empresa, probablemente:", "o": ["Asuma fácilmente responsabilidades como supervisor.", "Haga ver de inmediato su valer.", "Sea lento para abrirse las oportunidades necesarias.", "Renuncie ante la más ligera crítica de su trabajo."]}, {"p": "Usted va a ser maestro de ceremonias en una cena el próximo sábado. Ese día por la mañana, debido a un enfermo en la familia, se ve imposibilitado de asistir. Lo indicado sería:", "o": ["Cancelar la cena.", "Encontrar quién lo sustituya.", "Detallar los planes que tenía y enviarlos.", "Enviar una nota explicando el motivo de su ausencia."]}, {"p": "En igualdad de circunstancias, el empleado que mejor se adapta a un nuevo puesto es aquel que:", "o": ["Ha sido bueno en puestos anteriores.", "Ha tenido éxito durante 10 años en su puesto.", "Tiene sus propias normas e invariablemente se rige por ellas.", "Cuenta con una buena recomendación de su jefe anterior."]}, {"p": "Un conocido le platica acerca de una afición que él tiene; su conversación le aburre. Lo mejor sería:", "o": ["Escuchar de manera cortés, pero aburrida.", "Escuchar con fingido interés.", "Decirle francamente que el tema no le interesa.", "Mirar el reloj con impaciencia."]}, {"p": "Usted es un empleado ordinario en una oficina grande; el jefe entra cuando usted lee en vez de trabajar. Lo mejor sería:", "o": ["Doblar el periódico y volver al trabajo.", "Pretender que obtiene recortes necesarios para el trabajo.", "Tratar de interesar al jefe leyéndole un encabezado importante.", "Seguir leyendo sin mostrar embarazo."]}, {"p": "Usted es maestra de primaria. Camina a la escuela tras la primera nevada y algunos de sus alumnos le lanzan bolas de nieve. Desde el punto de vista de la buena administración escolar, usted debería:", "o": ["Castigarlos ahí mismo por su indisciplina.", "Decirles que, de volver a hacerlo, los castigará.", "Pasar la queja a los padres.", "Tomarlo como broma y no hacer nada al respecto."]}, {"p": "Usted preside el comité de mejoras materiales de su colonia; las últimas reuniones han tenido escasa asistencia. Se mejoraría la asistencia:", "o": ["Visitando a los vecinos prominentes y explicándoles los problemas.", "Avisando de un programa interesante para la reunión.", "Poniendo avisos en los lugares públicos.", "Enviando avisos personales."]}, {"p": "Zaldívar es eficiente, pero de esos que «todo lo saben y critican». El jefe opina que la idea de Montoya ahorra tiempo. Probablemente Zaldívar:", "o": ["Pida otro trabajo al jefe.", "Lo haga a su modo, sin comentarios.", "Lo haga como Montoya, pero siga criticándolo.", "Lo haga como Montoya, pero mal a propósito."]}, {"p": "Un hombre de 65 años tuvo éxito de joven como político; sus modos directos le han causado muchos problemas durante los últimos 20 años. Lo más probable es que:", "o": ["Persista en su manera de ser.", "Cambie para lograr el éxito.", "Forme un nuevo partido político.", "Abandone la política por inmoral."]}, {"p": "Usted es un joven que se encuentra en la calle a una mujer de más edad, a quien apenas conoce y que parece haber estado llorando. Lo mejor sería:", "o": ["Preguntarle por qué está triste.", "Pasarle el brazo consoladoramente.", "Simular no advertir su pena.", "Simular no haberla visto."]}, {"p": "Un compañero flojea de tal manera que a usted le toca más trabajo del que le corresponde. La mejor forma de conservar buenas relaciones es:", "o": ["Explicar el caso al jefe.", "Indicarle cortésmente que debe hacer lo que le corresponde o que usted se quejará con el jefe.", "Hacer tanto como pueda eficientemente y no decir nada del caso.", "Hacer lo suyo y dejar pendiente lo que el compañero no haga."]}, {"p": "Se le ha asignado un puesto ejecutivo en una organización. Para ganar el respeto y la admiración de sus subordinados sin perjuicio de sus planes, habría que:", "o": ["Ceder en los pequeños puntos posibles.", "Tratar de convencerlos de todas sus ideas.", "Ceder parcialmente en todas las cuestiones importantes.", "Abogar por muchas reformas."]}];
+var N = ITEMS.length, LET = ['A','B','C','D'];
+
+(function(){
+  var QS = new URLSearchParams(location.search);
+  var LOCKED = (QS.get('bloquear')||'').split(',').map(function(s){return s.trim();}).filter(Boolean);
+  var DEMO = !/^https?:\/\//.test(CONFIG.endpoint) || CONFIG.endpoint.indexOf('PEGAR_AQUI') >= 0;
+  var STORE_KEY = 'erea_' + CONFIG.prueba.toLowerCase() + '_v1_' + (QS.get('empresa')||'general');
+  var QUEUE_KEY = 'erea_' + CONFIG.prueba.toLowerCase() + '_cola_envios';
+
+  var st = load() || {datos:{}, resp:[], q:0, step:'portada', id:uid(), inicio:null};
+  while (st.resp.length < N) st.resp.push(null);
+
+  function $(id){return document.getElementById(id);}
+  function uid(){return 'S' + Date.now().toString(36) + Math.random().toString(36).slice(2,8);}
+  function save(){try{localStorage.setItem(STORE_KEY, JSON.stringify(st));}catch(e){}}
+  function load(){try{var s=localStorage.getItem(STORE_KEY);return s?JSON.parse(s):null;}catch(e){return null;}}
+  function clearSave(){try{localStorage.removeItem(STORE_KEY);}catch(e){}}
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+  if (DEMO) $('demoBar').hidden = false;
+
+  /* ---------- IP pública y zona horaria (para auditoría) ---------- */
+  function obtenerIP(){
+    if (st.ip) return Promise.resolve(st.ip);
+    var urls = ['https://api.ipify.org?format=json', 'https://api64.ipify.org?format=json'];
+    function intento(k){
+      if (k >= urls.length) return Promise.resolve('');
+      var ctl = window.AbortController ? new AbortController() : null;
+      var t = setTimeout(function(){ if (ctl) ctl.abort(); }, 4000);
+      return fetch(urls[k], ctl ? {signal: ctl.signal} : {}).then(function(r){ return r.json(); })
+        .then(function(j){ clearTimeout(t); st.ip = j.ip || ''; save(); return st.ip; })
+        .catch(function(){ clearTimeout(t); return intento(k + 1); });
+    }
+    return intento(0);
+  }
+  obtenerIP();
+  var ZONA = ''; try { ZONA = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch(e) {}
+
+  /* ---------- prefill ---------- */
+  CONFIG.campos.forEach(function(c){ if (QS.get(c.id)) st.datos[c.id] = QS.get(c.id); });
+  var emp = st.datos.empresa || QS.get('empresa') || '';
+  if (emp){ $('metaEmpresa').textContent = emp; $('hdrEmpresa').textContent = emp; }
+  else $('metaEmpresa').parentNode.hidden = true;
+
+  /* ---------- navegación ---------- */
+  function show(step){
+    st.step = step; save();
+    document.body.classList.toggle('qmode', step === 'preguntas');
+    document.querySelectorAll('[data-step]').forEach(function(s){ s.hidden = s.getAttribute('data-step') !== step; });
+    var pct = {portada:0, datos:6, instrucciones:12, revision:96, fin:100}[step];
+    if (step === 'preguntas') pct = 15 + Math.round(80 * st.q / N);
+    $('progBar').style.width = pct + '%';
+    if (step === 'preguntas') renderQ();
+    if (step === 'revision') renderSummary();
+    window.scrollTo(0,0);
+  }
+  document.querySelectorAll('[data-go]').forEach(function(b){ b.onclick = function(){ show(b.getAttribute('data-go')); }; });
+
+  /* ---------- portada ---------- */
+  $('consent').checked = !!st.consent;
+  $('btnStart').disabled = !st.consent;
+  $('consent').onchange = function(){ st.consent = this.checked; $('btnStart').disabled = !this.checked; save(); };
+  $('btnStart').onclick = function(){ if (!st.inicio) st.inicio = new Date().toISOString(); show('datos'); };
+
+  /* ---------- datos ---------- */
+  var form = $('formDatos');
+  CONFIG.campos.filter(function(c){return c.visible;}).forEach(function(c){
+    var locked = LOCKED.indexOf(c.id) >= 0 && st.datos[c.id];
+    var val = st.datos[c.id] || '';
+    var html = '<div class="f' + (c.id==='empresa'?' full':'') + '" data-f="'+c.id+'"><label for="f_'+c.id+'">' + esc(c.etiqueta) + (c.requerido?' <span class="req">*</span>':'') + '</label>';
+    if (c.opciones && c.opciones.length && !locked){
+      html += '<select id="f_'+c.id+'"><option value="">Seleccione…</option>' + c.opciones.map(function(o){return '<option'+(o===val?' selected':'')+'>'+esc(o)+'</option>';}).join('') + '</select>';
+    } else {
+      html += '<input id="f_'+c.id+'" type="'+(c.tipo==='date'?'date':'text')+'" value="'+esc(val)+'"'+(locked?' readonly':'')+(c.auto?' autocomplete="'+c.auto+'"':'')+(c.tipo==='date'?' max="'+new Date().toISOString().slice(0,10)+'"':'')+'>';
+    }
+    html += '<div class="hint"></div></div>';
+    form.insertAdjacentHTML('beforeend', html);
+  });
+  form.addEventListener('input', function(e){
+    var id = e.target.id.replace('f_',''); st.datos[id] = e.target.value.trim(); save();
+    var f = e.target.closest('.f'); f.classList.remove('bad'); f.querySelector('.hint').textContent='';
+  });
+  form.addEventListener('change', function(e){ var id = e.target.id.replace('f_',''); st.datos[id] = e.target.value.trim(); save(); });
+  $('btnDatos').onclick = function(){
+    var ok = true, first = null;
+    CONFIG.campos.filter(function(c){return c.visible;}).forEach(function(c){
+      var el = $('f_'+c.id), v = (el.value||'').trim(), f = el.closest('.f'), msg = '';
+      st.datos[c.id] = v;
+      if (c.requerido && !v) msg = 'Campo obligatorio';
+      if (!msg && c.tipo==='date' && v){ var y = +v.slice(0,4), now = new Date().getFullYear(); if (y < now-90 || y > now-14) msg = 'Revise la fecha'; }
+      f.classList.toggle('bad', !!msg); f.querySelector('.hint').textContent = msg;
+      if (msg){ ok = false; first = first || el; }
+    });
+    save();
+    if (!ok){ first.focus(); return; }
+    show('instrucciones');
+  };
+  $('btnInstr').onclick = function(){ show('preguntas'); };
+
+  /* ---------- preguntas ---------- */
+  function narrow(){ return window.innerWidth < 420; }
+  function cnt(){ var n = st.resp.filter(function(x){return x;}).length; return narrow() ? n + ' de ' + N : n + ' de ' + N + ' respondidas'; }
+  function renderQ(){
+    var q = st.q, it = ITEMS[q], r = st.resp[q];
+    $('qEyebrow').textContent = 'Situación ' + (q+1) + ' de ' + N;
+    $('qText').textContent = it.p;
+    $('qBox').innerHTML = it.o.map(function(t, i){
+      var L = LET[i], on = r === L;
+      return '<label class="op'+(on?' on':'')+'"><input type="radio" name="op" value="'+L+'"'+(on?' checked':'')+'><span class="lt">'+L+'</span><span class="tx">'+esc(t)+'</span></label>';
+    }).join('');
+    $('qErr').hidden = true;
+    $('qCounter').textContent = cnt();
+    $('btnNext').textContent = q === N-1 ? (narrow() ? 'Revisar' : 'Revisar y enviar') : 'Siguiente';
+    $('progBar').style.width = (15 + Math.round(80 * q / N)) + '%';
+  }
+  $('qBox').addEventListener('change', function(e){
+    st.resp[st.q] = e.target.value; save();
+    document.querySelectorAll('#qBox .op').forEach(function(l){ l.classList.toggle('on', l.querySelector('input').checked); });
+    $('qErr').hidden = true;
+    $('qCounter').textContent = cnt();
+  });
+  $('btnNext').onclick = function(){
+    if (!st.resp[st.q]){ $('qErr').textContent = 'Elija una opción para continuar.'; $('qErr').hidden = false; return; }
+    if (st.q < N-1){ st.q++; save(); renderQ(); window.scrollTo(0,0); }
+    else show('revision');
+  };
+  $('btnPrev').onclick = function(){ if (st.q > 0){ st.q--; save(); renderQ(); window.scrollTo(0,0); } else show('instrucciones'); };
+
+  /* ---------- teclado: A-D o 1-4 marcan, Enter continúa ---------- */
+  var KEYMAP = {a:'A',b:'B',c:'C',d:'D','1':'A','2':'B','3':'C','4':'D'};
+  document.addEventListener('keydown', function(e){
+    if (st.step !== 'preguntas' || e.ctrlKey || e.metaKey || e.altKey) return;
+    var t = e.target; if (t && /^(INPUT|SELECT|TEXTAREA)$/.test(t.tagName) && t.type !== 'radio') return;
+    var k = (e.key || '').toLowerCase();
+    if (KEYMAP[k]){
+      var el = document.querySelector('#qBox input[value="'+KEYMAP[k]+'"]');
+      if (el){ el.checked = true; el.dispatchEvent(new Event('change', {bubbles:true})); el.focus({preventScroll:true}); e.preventDefault(); }
+    } else if (k === 'enter'){
+      e.preventDefault(); $('btnNext').click();
+    }
+  });
+
+  /* ---------- revisión ---------- */
+  function renderSummary(){
+    var h = '';
+    for (var q = 0; q < N; q++) h += '<button type="button" class="'+(st.resp[q]?'ok':'no')+'" data-q="'+q+'">'+(q+1)+(st.resp[q]?' ✓':' !')+'</button>';
+    $('sumBox').innerHTML = h;
+    var falt = st.resp.filter(function(x){return !x;}).length;
+    $('btnSend').disabled = falt > 0;
+    $('sendErr').hidden = falt === 0;
+    if (falt) $('sendErr').textContent = 'Faltan ' + falt + ' situación(es) por responder (marcadas en rojo).';
+  }
+  $('sumBox').onclick = function(e){ var b = e.target.closest('button'); if (!b) return; st.q = +b.getAttribute('data-q'); show('preguntas'); };
+  $('btnBackQ').onclick = function(){ st.q = N-1; show('preguntas'); };
+
+  /* ---------- envío ---------- */
+  function payload(){
+    var fin = new Date();
+    return {
+      submissionId: st.id, prueba: CONFIG.prueba, version: CONFIG.version,
+      datos: st.datos, respuestas: st.resp,
+      inicio: st.inicio, fin: fin.toISOString(),
+      duracionSeg: st.inicio ? Math.round((fin - new Date(st.inicio)) / 1000) : null,
+      ip: st.ip || '', zona: ZONA,
+      origen: location.href.split('#')[0], ua: navigator.userAgent.slice(0,180)
+    };
+  }
+  function post(p){
+    if (DEMO) return new Promise(function(res){ setTimeout(function(){ res({ok:true, folio:'DEMO-' + p.submissionId.slice(-5).toUpperCase(), demo:true}); }, 600); });
+    return fetch(CONFIG.endpoint, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(p), redirect:'follow'})
+      .then(function(r){ if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(function(j){ if (!j.ok) throw new Error(j.error || 'Error del servidor'); return j; });
+  }
+  function sendWithRetry(p, tries){
+    return post(p).catch(function(err){
+      if (tries <= 1) throw err;
+      return new Promise(function(res){ setTimeout(res, (6 - tries) * 1500 + Math.random()*1000); }).then(function(){ return sendWithRetry(p, tries - 1); });
+    });
+  }
+  function queue(){ try{ return JSON.parse(localStorage.getItem(QUEUE_KEY) || '[]'); }catch(e){ return []; } }
+  function setQueue(q){ try{ localStorage.setItem(QUEUE_KEY, JSON.stringify(q)); }catch(e){} }
+  function flushQueue(){
+    var q = queue(); if (!q.length) return;
+    var p = q[0];
+    sendWithRetry(p, 3).then(function(){
+      setQueue(queue().filter(function(x){ return x.submissionId !== p.submissionId; }));
+      $('pendingBox').hidden = true; flushQueue();
+    }).catch(function(){});
+  }
+  $('btnSend').onclick = function(){
+    var btn = this; btn.disabled = true; btn.textContent = 'Enviando…'; $('sendErr').hidden = true;
+    obtenerIP().then(function(){ var p = payload(); enviar(p); });
+  };
+  function enviar(p){
+    sendWithRetry(p, 5).then(function(j){
+      clearSave();
+      if (j.folio){ $('finFolio').textContent = 'Código de confirmación: ' + j.folio; $('finFolio').hidden = false; }
+      if (j.demo) $('finMsg').textContent = 'Modo demostración: el cuestionario funcionó, pero las respuestas no se guardaron porque falta configurar el destino de datos.';
+      show('fin');
+    }).catch(function(){
+      var q = queue().filter(function(x){ return x.submissionId !== p.submissionId; }); q.push(p); setQueue(q);
+      clearSave();
+      $('finMsg').innerHTML = '<b>No hubo conexión estable para enviar.</b> Sus respuestas quedaron guardadas en este dispositivo y se enviarán automáticamente cuando vuelva la conexión. Por favor, vuelva a abrir este mismo enlace más tarde desde este dispositivo para completar el envío.';
+      show('fin');
+    });
+  }
+  window.addEventListener('online', flushQueue);
+  if (queue().length){
+    $('pendingBox').innerHTML = '<b>Hay un cuestionario pendiente de envío en este dispositivo.</b> Se está intentando enviar automáticamente.';
+    $('pendingBox').hidden = false; flushQueue();
+  }
+
+  /* ---------- arranque ---------- */
+  show(st.step === 'fin' ? 'portada' : st.step);
+})();
+</script>
+</body>
+</html>
