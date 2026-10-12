@@ -269,7 +269,7 @@ input,select{font:inherit;font-size:14px;padding:8px 10px;border:1px solid var(-
 var DEFAULT_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwTYeDnJZjF_W_-h5wQb14k34qIxSjaXn8wM7vwP4ly5KwxnDROguvXcBZrP0MszBdx/exec';
 var A5 = ['HS','CD','EPI','RI','SC'];
 var NIV = ['Deficiente','Inferior','Medio inferior','Promedio','Medio superior','Superior','Muy superior'];
-var DIMS = [['empresa','Empresa'],['area','Área'],['puesto','Puesto'],['sede','Sede'],['nivel','Nivel jerárquico'],['genero','Género'],['antiguedad','Antigüedad'],['edad_r','Rango de edad']];
+var DIMS = [['nivel','Nivel del rol'],['puesto','Puesto'],['area','Área'],['empresa','Empresa'],['sede','Sede'],['edad_r','Rango de edad'],['genero','Sexo / género'],['antiguedad','Antigüedad']];
 var DATA = null, MOSS = {}, FILT = {}, DISC = null;
 // ===== Motor de calificación MOSS (EREA) =====
 // Clave, áreas y niveles del Manual del Test de Adaptabilidad Social (MOSS), verificados contra el Excel EREA.
@@ -417,11 +417,10 @@ function buildFilters(){
   var h='';
   DIMS.forEach(function(d){
     var vals = uniq(DATA.map(function(x){return x.datos[d[0]]||'Sin dato';}));
-    if (vals.length < 2 && d[0]!=='empresa') return;
     h += '<div class="f"><label>'+d[1]+'</label><select data-dim="'+d[0]+'"><option value="">Todos</option>'+vals.map(function(v){return '<option'+(FILT[d[0]]===v?' selected':'')+'>'+esc(v)+'</option>';}).join('')+'</select></div>';
   });
   $('filters').innerHTML = h;
-  $('grpBy').innerHTML = DIMS.filter(function(d){return d[0]!=='empresa'||uniq(DATA.map(function(x){return x.datos.empresa;})).length>1;}).map(function(d){return '<option value="'+d[0]+'">'+d[1]+'</option>';}).join('');
+  $('grpBy').innerHTML = DIMS.map(function(d){return '<option value="'+d[0]+'">'+d[1]+'</option>';}).join('');
   $('grpBy').value = 'nivel';
 }
 $('filters').onchange = function(e){ var d=e.target.getAttribute('data-dim'); if(e.target.value) FILT[d]=e.target.value; else delete FILT[d]; renderCons(); };
