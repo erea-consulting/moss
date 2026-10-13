@@ -293,7 +293,7 @@ var N = ITEMS.length, LET = ['A','B','C','D'];
     if (c.opciones && c.opciones.length && !locked){
       html += '<select id="f_'+c.id+'"><option value="">Seleccione…</option>' + c.opciones.map(function(o){return '<option'+(o===val?' selected':'')+'>'+esc(o)+'</option>';}).join('') + '</select>';
     } else {
-      html += '<input id="f_'+c.id+'" type="'+(c.tipo==='date'?'date':'text')+'" value="'+esc(val)+'"'+(locked?' readonly':'')+(c.auto?' autocomplete="'+c.auto+'"':'')+(c.tipo==='dni'?' inputmode="numeric" maxlength="15" placeholder="0801-1990-12345"':'')+(c.tipo==='date'?' max="'+new Date().toISOString().slice(0,10)+'"':'')+'>';
+      html += '<input id="f_'+c.id+'" type="'+(c.tipo==='date'?'date':'text')+'" value="'+esc(val)+'"'+(locked?' readonly':'')+(c.auto?' autocomplete="'+c.auto+'"':'')+(c.tipo==='dni'?' autocomplete="off"':'')+(c.tipo==='date'?' max="'+new Date().toISOString().slice(0,10)+'"':'')+'>';
     }
     html += '<div class="hint"></div></div>';
     form.insertAdjacentHTML('beforeend', html);
@@ -327,7 +327,7 @@ var N = ITEMS.length, LET = ['A','B','C','D'];
       var el = $('f_'+c.id), v = (el.value||'').trim(), f = el.closest('.f'), msg = '';
       st.datos[c.id] = v;
       if (c.requerido && !v) msg = 'Campo obligatorio';
-      if (!msg && c.tipo==='dni'){ var dg = v.replace(/\D/g,''); if (dg.length !== 13) msg = 'El DNI debe tener 13 dígitos (por ejemplo 0801-1990-12345)'; else { v = dg.slice(0,4)+'-'+dg.slice(4,8)+'-'+dg.slice(8); el.value = v; st.datos[c.id] = v; } }
+      // ID abierto (v13-oct-2026): sin restricción de caracteres ni de largo, para Honduras, Nicaragua y Belice.
       if (!msg && c.tipo==='date' && v){ var y = +v.slice(0,4), now = new Date().getFullYear(); if (y < now-90 || y > now-14) msg = 'Revise la fecha'; }
       f.classList.toggle('bad', !!msg); f.querySelector('.hint').textContent = msg;
       if (msg){ ok = false; first = first || el; }
