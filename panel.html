@@ -266,6 +266,7 @@ input,select{font:inherit;font-size:14px;padding:8px 10px;border:1px solid var(-
 </main>
 
 <script>
+var CENSO_TXT = {NO_CENSO:'DNI no está en el censo', EMPRESA:'Empresa distinta a la del censo', DNI:'DNI con formato inválido'};
 var DEFAULT_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwTYeDnJZjF_W_-h5wQb14k34qIxSjaXn8wM7vwP4ly5KwxnDROguvXcBZrP0MszBdx/exec';
 var A5 = ['HS','CD','EPI','RI','SC'];
 var NIV = ['Deficiente','Inferior','Medio inferior','Promedio','Medio superior','Superior','Muy superior'];
@@ -382,7 +383,7 @@ function cargar(){
      MOSS = j.moss;
      DATA = j.registros.map(function(x){ x.datos.edad_r = edadR(x.edad); x.r = mossCalificar(x.resp); x.cal = mossCalidad(x.duracionMin, x.resp); x.brecha = mossBrechaNivel(x.r, x.datos.nivel); return x; });
      var vistos = {}; DATA.forEach(function(x){ var id = idKey(x.datos.identidad); x.idRep=''; if(!id)return; if(vistos[id]) x.idRep = vistos[id]; else vistos[id] = x.folio; });
-     DATA.forEach(function(x){ x.alq = x.cal.map(function(q){return q.tipo;}); if (x.idRep) x.alq.push('ID repetido'); });
+     DATA.forEach(function(x){ x.alq = x.cal.map(function(q){return q.tipo;}); if (x.idRep) x.alq.push('ID repetido'); if (x.censo) x.alq.push(CENSO_TXT[x.censo] || x.censo); });
      $('hdrSub').textContent = DATA.length + ' respuestas · actualizado ' + new Date(j.generado).toLocaleString('es-HN');
      $('vLogin').hidden = true; $('tabs').hidden = false;
      buildFilters(); tab('consolidado');
@@ -517,7 +518,7 @@ function renderDisc(D){
 }
 function renderAlertas(D){
   var L = D.filter(function(x){return x.alq.length;});
-  $('tblAlertas').innerHTML = L.length ? '<table class="tbl"><thead><tr><th>Folio</th><th>Persona</th><th class="num">Duración (min)</th><th>Alerta</th></tr></thead><tbody>'+L.map(function(x){return '<tr><td>'+esc(x.folio)+'</td><td>'+esc(x.datos.nombre+' '+x.datos.apellido)+'</td><td class="num">'+esc(x.duracionMin)+'</td><td><span class="tag medio">'+esc(x.alq.join(' · '))+'</span></td></tr>';}).join('')+'</tbody></table><div class="src">Respuesta rápida: menos de '+MOSS.calidad.minMinutos+' minutos. Patrón de respuesta: misma letra en '+MOSS.calidad.maxMismaLetra+' o más situaciones, o secuencia A-B-C-D. ID repetido: la identidad ya había respondido.</div>' : '<p style="margin:0">Sin alertas de calidad en el grupo filtrado.</p>';
+  $('tblAlertas').innerHTML = L.length ? '<table class="tbl"><thead><tr><th>Folio</th><th>Persona</th><th class="num">Duración (min)</th><th>Alerta</th></tr></thead><tbody>'+L.map(function(x){return '<tr><td>'+esc(x.folio)+'</td><td>'+esc(x.datos.nombre+' '+x.datos.apellido)+'</td><td class="num">'+esc(x.duracionMin)+'</td><td><span class="tag medio">'+esc(x.alq.join(' · '))+'</span></td></tr>';}).join('')+'</tbody></table><div class="src">Respuesta rápida: menos de '+MOSS.calidad.minMinutos+' minutos. Patrón de respuesta: misma letra en '+MOSS.calidad.maxMismaLetra+' o más situaciones, o secuencia A-B-C-D. ID repetido: la identidad ya había respondido. Censo: el DNI no está en el censo, la empresa no coincide o el DNI no tiene 13 dígitos; corregir para completar área, puesto y nivel.</div>' : '<p style="margin:0">Sin alertas de calidad en el grupo filtrado.</p>';
 }
 
 /* ---------------- individual ---------------- */
@@ -557,6 +558,7 @@ function reportHTML(x){
   h += '<div class="kicker">«'+esc(kick)+'»</div>';
   // Calidad
   x.cal.forEach(function(q){ h += '<div class="alerta r"><b>Alerta de calidad · '+esc(q.tipo)+'.</b> '+esc(q.desc)+'</div>'; });
+  if (x.censo) h += '<div class="alerta r"><b>Alerta de datos · '+esc(CENSO_TXT[x.censo] || x.censo)+'.</b> Revise el número de identidad contra el censo de la empresa. Mientras no se corrija, el código, área, puesto, sede, nivel, edad, género y antigüedad de esta persona pueden quedar vacíos.</div>';
   if (x.idRep) h += '<div class="alerta r"><b>Alerta de calidad · ID repetido.</b> Esta identidad ya había respondido con el folio '+esc(x.idRep)+'. Confirmar cuál registro es válido.</div>';
   // CAPA 1 · calificación del manual
   h += '<div class="sec"><h3>1. Resultado por área</h3><div class="areas5">'+A5.map(function(a){ var b=r.banda[a]; return '<div class="'+(b==='alto'?'hi':(b==='bajo'?'lo':''))+'"><div class="l">'+a+' · '+esc(ar(a).corto)+'</div><div class="p">'+r.pct[a]+'%</div><div class="n">'+r.aciertos[a]+' de '+r.n[a]+' aciertos</div><div style="margin-top:4px">'+lvTag(r.nivel[a])+'</div></div>'; }).join('')+'</div>';
